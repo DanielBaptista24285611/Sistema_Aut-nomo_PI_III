@@ -20,8 +20,7 @@ namespace Sistema_Autônomo_PI_III
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string retorno = Jogo.ListarPartidas("T");
-            txtListarPartidas.Text = retorno;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,6 +30,7 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
+            string retorno = Jogo.ListarPartidas("T");
             txtListarPartidas.Text = retorno;
         }
     }
