@@ -29,8 +29,9 @@ namespace Sistema_Autônomo_PI_III
 
         }
 
-
-
-
+        private void btnListarPartidas_Click(object sender, EventArgs e)
+        {
+            txtListarPartidas.Text = retorno;
+        }
     }
 }

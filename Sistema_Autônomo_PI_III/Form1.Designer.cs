@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSenhaPartida = new System.Windows.Forms.TextBox();
@@ -44,6 +45,7 @@
             this.btnEntrar = new System.Windows.Forms.Button();
             this.btnListarJogadores = new System.Windows.Forms.Button();
             this.txtListarJogadores = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label1
@@ -126,6 +128,7 @@
             this.btnListarPartidas.TabIndex = 17;
             this.btnListarPartidas.Text = "Listar Partidas";
             this.btnListarPartidas.UseVisualStyleBackColor = true;
+            this.btnListarPartidas.Click += new System.EventHandler(this.btnListarPartidas_Click);
             // 
             // label3
             // 
@@ -178,11 +181,22 @@
             this.txtListarJogadores.Size = new System.Drawing.Size(272, 78);
             this.txtListarJogadores.TabIndex = 23;
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::Sistema_Autônomo_PI_III.Properties.Resources.CaveleiroCavalo;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.ForeColor = System.Drawing.Color.Transparent;
+            this.panel1.Location = new System.Drawing.Point(531, 124);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(254, 247);
+            this.panel1.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 561);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtListarJogadores);
             this.Controls.Add(this.btnListarJogadores);
             this.Controls.Add(this.btnEntrar);
@@ -199,8 +213,10 @@
             this.Controls.Add(this.txtSenhaPartida);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cavaleiros de Canterbury";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -224,6 +240,7 @@
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Button btnListarJogadores;
         private System.Windows.Forms.TextBox txtListarJogadores;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
