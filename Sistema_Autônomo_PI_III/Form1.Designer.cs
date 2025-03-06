@@ -33,7 +33,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSenhaPartida = new System.Windows.Forms.TextBox();
             this.btnCriar = new System.Windows.Forms.Button();
-            this.txtListarPartidas = new System.Windows.Forms.TextBox();
             this.txtNomeGrupo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtIdPartida = new System.Windows.Forms.TextBox();
@@ -46,6 +45,8 @@
             this.btnListarJogadores = new System.Windows.Forms.Button();
             this.txtListarJogadores = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lblInforma = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -81,14 +82,7 @@
             this.btnCriar.TabIndex = 7;
             this.btnCriar.Text = "Criar Partida";
             this.btnCriar.UseVisualStyleBackColor = true;
-            // 
-            // txtListarPartidas
-            // 
-            this.txtListarPartidas.Location = new System.Drawing.Point(31, 242);
-            this.txtListarPartidas.Multiline = true;
-            this.txtListarPartidas.Name = "txtListarPartidas";
-            this.txtListarPartidas.Size = new System.Drawing.Size(272, 129);
-            this.txtListarPartidas.TabIndex = 11;
+            this.btnCriar.Click += new System.EventHandler(this.btnCriar_Click);
             // 
             // txtNomeGrupo
             // 
@@ -191,11 +185,30 @@
             this.panel1.Size = new System.Drawing.Size(254, 247);
             this.panel1.TabIndex = 24;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(31, 239);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(272, 134);
+            this.listBox1.TabIndex = 25;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // lblInforma
+            // 
+            this.lblInforma.AutoSize = true;
+            this.lblInforma.Location = new System.Drawing.Point(191, 92);
+            this.lblInforma.Name = "lblInforma";
+            this.lblInforma.Size = new System.Drawing.Size(0, 13);
+            this.lblInforma.TabIndex = 26;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 561);
+            this.Controls.Add(this.lblInforma);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtListarJogadores);
             this.Controls.Add(this.btnListarJogadores);
@@ -208,7 +221,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtIdPartida);
             this.Controls.Add(this.txtNomeGrupo);
-            this.Controls.Add(this.txtListarPartidas);
             this.Controls.Add(this.btnCriar);
             this.Controls.Add(this.txtSenhaPartida);
             this.Controls.Add(this.label2);
@@ -228,7 +240,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtSenhaPartida;
         private System.Windows.Forms.Button btnCriar;
-        private System.Windows.Forms.TextBox txtListarPartidas;
         private System.Windows.Forms.TextBox txtNomeGrupo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtIdPartida;
@@ -241,6 +252,8 @@
         private System.Windows.Forms.Button btnListarJogadores;
         private System.Windows.Forms.TextBox txtListarJogadores;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label lblInforma;
     }
 }
 
