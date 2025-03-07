@@ -16,12 +16,30 @@ namespace Sistema_Autônomo_PI_III
         public Form1()
         {
             InitializeComponent();
+            lblversao.Text= Jogo.versao;
         }
+        private int idPartidaAtual;
         private void btnCriar_Click(object sender, EventArgs e)
         {
-            string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", $"{txtNomeGrupo.Text}");
 
-            lblInforma.Text = "Partida Criada!";
+            if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))
+            {
+                lblInforma.Text = "ERRO: Senha está vazia!";
+            }
+            else if (string.IsNullOrWhiteSpace(txtNomeGrupo.Text))
+            {
+                lblInforma.Text = "ERRO: Digite o nome do Grupo!";
+            }
+            else if (txtNomeGrupo.Text.Length > 20)
+            {
+                lblInforma.Text = "ERRO: Nome do Grupo passa de 20 Caracters!";
+            }
+            else
+            {
+                string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", $"{txtNomeGrupo.Text}");
+
+                lblInforma.Text = "Partida Criada!";
+            }
         }
 
 
@@ -39,7 +57,7 @@ namespace Sistema_Autônomo_PI_III
             retorno = retorno.Substring(0, retorno.Length - 1);
             string[] partidas = retorno.Split('\n');
 
-
+            listBox1.Items.Clear();
             for (int i = 0; i < partidas.Length; i++)
             {
                 listBox1.Items.Add(partidas[i]);
@@ -47,36 +65,32 @@ namespace Sistema_Autônomo_PI_III
             }
 
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private string[] DadosPartida;
+        public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string partida = listBox1.ToString();
-            string[] dadosPartida = partida.Split('\n');
+            string partida = listBox1.SelectedItem.ToString();
+            DadosPartida = partida.Split(',');
+
+             idPartidaAtual = Convert.ToInt32(DadosPartida[0]);
+            lblInforma.Text= idPartidaAtual.ToString();
+           // label6.Text = idPartidaAtual.ToString();
+            txtIdPartida.Text= lblInforma.Text;
 
 
         }
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem == null)
+            idPartidaAtual = Convert.ToInt32(DadosPartida[0]);
+
+            string retorno = Jogo.ListarJogadores(idPartidaAtual);
+            retorno = retorno.Replace("\r", "");
+            string[] jogadores = retorno.Split('\n');
+
+            listBox2.Items.Clear();
+            for (int i = 0; i < jogadores.Length; i++)
             {
-                MessageBox.Show("Por favor, selecione uma partida.");
-                return;
-            }
-
-            string partida = listBox1.SelectedItem.ToString();
-            string[] dadosPartida = partida.Split('\n');
-
-            int idPartida = Convert.ToInt32(dadosPartida[0]);
-
-            string retornoJ = Jogo.ListarJogadores(idPartida);
-            retornoJ = retornoJ.Replace("\r", "");
-            string[] jogadores = retornoJ.Split('\n');
-
-            listBox2.Items.Clear(); 
-            foreach (string jogador in jogadores)
-            {
-                listBox2.Items.Add(jogador);
+                listBox2.Items.Add(jogadores[i]);
             }
         }
 
@@ -105,15 +119,18 @@ namespace Sistema_Autônomo_PI_III
             string senhaPartida = txtSenhaPartida.Text;
 
             string jogador = Jogo.Entrar(idPartida, nomeJogador, senhaPartida);
+            string[] dadosJogador = jogador.Split(',');
 
-            if (string.IsNullOrEmpty(jogador))
+            if (dadosJogador.Length == 2)
             {
-                MessageBox.Show("Erro ao entrar na partida. Verifique suas credenciais.");
+                lblidJogador.Text = $"ID do Jogador: {dadosJogador[0]}";   // Primeiro valor (ID) no lblIdJogador
+                lblsenha.Text = $"Senha: {dadosJogador[1]}";        // Segundo valor (senha) no lblSenha
             }
             else
             {
-                MessageBox.Show($"Jogador {jogador} entrou na partida com sucesso.");
+                lblerro.Text = "Erro: Retorno inesperado de 'Jogo.Entrar'."; // Exibe mensagem de erro em caso de problema
             }
         }
+
     }
 }
