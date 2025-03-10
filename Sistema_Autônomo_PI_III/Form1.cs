@@ -17,6 +17,7 @@ namespace Sistema_Autônomo_PI_III
         {
             InitializeComponent();
             lblversao.Text= Jogo.versao;
+            txtNomeGrupo.Text = "Cavaleiros de Canterbury";
         }
         private int idPartidaAtual; //declara de maneira global idPartidaAtual
         private string[] dadosPartida; //declara de maneira global dadosPartida
