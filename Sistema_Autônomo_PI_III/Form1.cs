@@ -181,7 +181,7 @@ namespace Sistema_Autônomo_PI_III
             int idJogador = Int32.Parse(txtIDJogador.Text);
             string retorno;
             retorno = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
-            lblTeste.Text = retorno;
+            lblIDjogadorVez.Text = retorno;
             MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
