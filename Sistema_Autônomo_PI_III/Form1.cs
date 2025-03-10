@@ -17,16 +17,18 @@ namespace Sistema_Autônomo_PI_III
         {
             InitializeComponent();
             lblversao.Text= Jogo.versao;
-            txtNomeGrupo.Text = "Cavaleiros de Canterbury";
+            txtNomeGrupo.Text = "CavaleirosCanterbury";
         }
         int idPartidaAtual; //declara de maneira global idPartidaAtual
         string[] dadosPartida; //declara de maneira global dadosPartida
         string partida;
         int idJogador;
         string senhaJogador;
+        private string carateres;
 
         void btnCriar_Click(object sender, EventArgs e)
         {
+            carateres = ": ? * |¨¨ $ @ * ( ) # ; , % - _ ; < > ";
 
             if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))//exibe o erro caso o txtSenhaPartida seje nulo
             {
@@ -38,7 +40,11 @@ namespace Sistema_Autônomo_PI_III
             }
             else if (txtNomeGrupo.Text.Length > 20)   //exibe o erro caso o txtNomeGrupo passe de 20 caracters
             {
-                lblInforma.Text = "ERRO: Nome do Grupo passa de 20 Caracters!";
+                lblInforma.Text = "ERRO: Nome Muito longo!";
+            }
+            else if (txtNomePartida.Text.Any(c => carateres.Contains(c))) // faz a verificacao se algum caracteres do nome do jogador é invalido
+            {
+                lblInforma.Text = "ERRO: Carcateres inválidos!";
             }
             else
             {
@@ -136,7 +142,7 @@ namespace Sistema_Autônomo_PI_III
             idJogador = Int32.Parse(txtIDjogador.Text);
 
 
-            lblCartas.Text = Jogo.ListarCartas(idJogador, senhaJogador);
+            lblCartas.Text = Jogo.ListarCartas(idJogador, txtSenhaJogador.Text);
         }
 
         private void lstJogadores_SelectedIndexChanged(object sender, EventArgs e)
@@ -176,6 +182,11 @@ namespace Sistema_Autônomo_PI_III
         {
             Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
             MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void lblInforma_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
