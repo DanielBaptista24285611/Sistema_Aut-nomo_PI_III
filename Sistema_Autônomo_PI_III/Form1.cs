@@ -18,10 +18,13 @@ namespace Sistema_Autônomo_PI_III
             InitializeComponent();
             lblversao.Text= Jogo.versao;
         }
-        private int idPartidaAtual; //declara de maneira global idPartidaAtual
-        private string[] dadosPartida; //declara de maneira global dadosPartida
-        private string partida;
-        private void btnCriar_Click(object sender, EventArgs e)
+        int idPartidaAtual; //declara de maneira global idPartidaAtual
+        string[] dadosPartida; //declara de maneira global dadosPartida
+        string partida;
+        int idJogador;
+        string senhaJogador;
+
+        void btnCriar_Click(object sender, EventArgs e)
         {
 
             if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))//exibe o erro caso o txtSenhaPartida seje nulo
@@ -58,23 +61,13 @@ namespace Sistema_Autônomo_PI_III
             retorno = retorno.Substring(0, retorno.Length - 1);
             string[] partidas = retorno.Split('\n');
 
-            listBox1.Items.Clear();
+            lstPartidas.Items.Clear();
             for (int i = 0; i < partidas.Length; i++)
             {
-                listBox1.Items.Add(partidas[i]);
+                lstPartidas.Items.Add(partidas[i]);
 
             }
 
-        }
-       
-        public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            partida = listBox1.SelectedItem.ToString();
-            dadosPartida = partida.Split(',');
-
-            idPartidaAtual = Convert.ToInt32(dadosPartida[0]); //idPartida convertido
-            lblInforma.Text = idPartidaAtual.ToString(); //passa para o lblInforma o idPartida
-            txtIdPartida.Text = lblInforma.Text;  //passa para o txtIdPartida o que está em lblInforma
         }
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
@@ -85,31 +78,32 @@ namespace Sistema_Autônomo_PI_III
             retorno = retorno.Replace("\r", "");  // cria espaço entre cada jogador
             string[] jogadores = retorno.Split('\n');
 
-            listBox2.Items.Clear();  //limpa os itens anteriores da listBox2 
+            lstJogadores.Items.Clear();  //limpa os itens anteriores da listbox
             for (int i = 0; i < jogadores.Length; i++)
             {
-                listBox2.Items.Add(jogadores[i]); //adiciona cada jogador
+                lstJogadores.Items.Add(jogadores[i]); //adiciona cada jogador
             }
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            
-            string partida = listBox1.SelectedItem.ToString();
-            dadosPartida = partida.Split(',');
-            
-
-            if (dadosPartida.Length == 0 || string.IsNullOrWhiteSpace(dadosPartida[0])) // exibe o erro de dados vazios ou incorretos
-            {
-                MessageBox.Show("Os dados da partida estão vazios ou incorretos.");
-                return;
-            }
-            
-             idPartidaAtual = Convert.ToInt32(dadosPartida[0]);
-         
-
             string nomeJogador = txtNomeJogador.Text;
             string senhaPartida = txtSenhaPartida.Text;
+
+            switch (VerificaEntrarPartida(nomeJogador, senhaPartida, txtIdPartida.Text))
+            {
+                case 0:
+                    break;
+                case 1:
+                    MessageBox.Show("Informe o ID da partida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                case 2:
+                    MessageBox.Show("Informe a senha da partida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                case 3:
+                    MessageBox.Show("Preencha o nome de jogador!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;   
+            }
 
             string jogador = Jogo.Entrar(idPartidaAtual, nomeJogador, senhaPartida);
             string[] dadosJogador = jogador.Split(',');
@@ -118,12 +112,69 @@ namespace Sistema_Autônomo_PI_III
             {
                 lblidJogador.Text = $"ID do Jogador: {dadosJogador[0]}";   // Primeiro valor (ID) no lblIdJogador
                 lblsenha.Text = $"Senha: {dadosJogador[1]}";        // Segundo valor (senha) no lblSenha
+                txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
+                txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
             }
             else
             {
-                lblerro.Text = "Erro: Retorno inesperado de 'Jogo.Entrar'."; // Exibe mensagem de erro em caso de problema
+                MessageBox.Show("Erro: Partida não encontrada!.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error); // Exibe mensagem de erro em caso de problema
             }
         }
+        private void lstPartidas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            partida = lstPartidas.SelectedItem.ToString();
+            dadosPartida = partida.Split(',');
 
+            idPartidaAtual = Convert.ToInt32(dadosPartida[0]); //idPartida convertido
+            lblInforma.Text = idPartidaAtual.ToString(); //passa para o lblInforma o idPartida
+            txtIdPartida.Text = lblInforma.Text;  //passa para o txtIdPartida o que está em lblInforma
+        }
+
+        private void btnExibirCartas_Click(object sender, EventArgs e)
+        {
+            idJogador = Int32.Parse(txtIDjogador.Text);
+
+
+            lblCartas.Text = Jogo.ListarCartas(idJogador, senhaJogador);
+        }
+
+        private void lstJogadores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstVerificarVez_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public int VerificaEntrarPartida(string nomeJogador, string senhaPartida, string idPartida)
+        {
+            if (string.IsNullOrWhiteSpace(idPartida))
+                return 1;
+
+            if (string.IsNullOrWhiteSpace(senhaPartida))
+                return 2;
+
+            if (string.IsNullOrWhiteSpace(nomeJogador))
+                return 3;
+
+            return 0;
+        }
+
+        private void btnVerificarVez_Click(object sender, EventArgs e)
+        {
+            string dados = Jogo.VerificarVez(idPartidaAtual);
+
+            string[] dadosSeparados = dados.Split(',');
+
+            lstVerificarVez.Text = dadosSeparados[0];
+        }
+
+        private void btnIniciarJogo_Click(object sender, EventArgs e)
+        {
+            Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+            MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
