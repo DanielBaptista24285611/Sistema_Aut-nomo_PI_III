@@ -22,8 +22,6 @@ namespace Sistema_Autônomo_PI_III
         int idPartidaAtual; //declara de maneira global idPartidaAtual
         string[] dadosPartida; //declara de maneira global dadosPartida
         string partida;
-        int idJogador;
-        string senhaJogador;
         private string carateres;
 
         void btnCriar_Click(object sender, EventArgs e)
@@ -139,7 +137,7 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
-            idJogador = Int32.Parse(txtIDjogador.Text);
+            int idJogador = Int32.Parse(txtIDjogador.Text);
 
 
             lblCartas.Text = Jogo.ListarCartas(idJogador, txtSenhaJogador.Text);
@@ -180,7 +178,10 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-            Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+            int idJogador = Int32.Parse(txtIDJogador.Text);
+            string retorno;
+            retorno = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+            lblTeste.Text = retorno;
             MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
