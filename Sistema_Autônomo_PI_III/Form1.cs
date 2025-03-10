@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +16,7 @@ namespace Sistema_Autônomo_PI_III
         public Form1()
         {
             InitializeComponent();
-            lblversao.Text = Jogo.versao;
+            lblversao.Text= Jogo.versao;
             txtNomeGrupo.Text = "CavaleirosCanterbury";
         }
         int idPartidaAtual; //declara de maneira global idPartidaAtual
@@ -46,8 +46,8 @@ namespace Sistema_Autônomo_PI_III
             }
             else
             {
-                string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", $"{txtNomeGrupo.Text}");
-                lblInforma.Text = "Partida Criada!";
+                string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
+                lblInforma.Text= "Partida Criada!";
             }
         }
 
@@ -107,7 +107,7 @@ namespace Sistema_Autônomo_PI_III
                     return;
                 case 3:
                     MessageBox.Show("Preencha o nome de jogador!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return;   
             }
 
             string jogador = Jogo.Entrar(idPartidaAtual, nomeJogador, senhaPartida);
