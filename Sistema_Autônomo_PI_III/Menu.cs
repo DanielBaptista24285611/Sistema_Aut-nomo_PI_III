@@ -32,5 +32,10 @@ namespace Sistema_Autônomo_PI_III
             Form1 form1 = new Form1();
             form1.ShowDialog();
         }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

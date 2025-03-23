@@ -18,7 +18,24 @@ namespace Sistema_Autônomo_PI_III
             InitializeComponent();
             lblversao.Text = Jogo.versao;
             txtNomeGrupo.Text = "CavaleirosCanterbury";
-            lstSetores.Text = "10.Rei\n 5.Nobres\n 4.Dignatários \n 3.Oficiais \n 2.Mercadores \n 1.Artesãos \n 0.Pebleus";
+
+            string setores = Jogo.ListarSetores();
+            string[] listaSetores = setores.Split('\n'); // Supondo que os setores estão separados por quebras de linha.
+
+            lstSetores.Items.Clear();  // Limpa os itens anteriores.
+            foreach (var setor in listaSetores)
+            {
+                lstSetores.Items.Add(setor);  // Adiciona cada setor na ListBox.
+            }
+
+            string Personagens = Jogo.ListarPersonagens();
+            string[] listaPersonagens = Personagens.Split('\n'); // Supondo que os personagens estão separados por quebras de linha.
+
+            lstPersonagens.Items.Clear();  // Limpa os itens anteriores.
+            foreach (var Personagem in listaPersonagens)
+            {
+                lstPersonagens.Items.Add(Personagem);  // Adiciona cada setor na ListBox.
+            }
         }
 
         int idPartidaAtual; //declara de maneira global idPartidaAtual
@@ -28,41 +45,17 @@ namespace Sistema_Autônomo_PI_III
 
         void btnCriar_Click(object sender, EventArgs e)
         {
-            try
+
+            string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
+           
+
+            if (partida.StartsWith("ERRO") || partida.Contains("erro"))  // Verifica se o retorno contém erro
             {
-                carateres = ": ? * |¨¨ $ @ * ( ) # ; , % - _ ; < > ";
-
-                if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))//exibe o erro caso o txtSenhaPartida seje nulo
-                {
-                    lblInforma.Text = "ERRO: Senha está vazia!";
-                }
-                else if (string.IsNullOrWhiteSpace(txtNomeGrupo.Text)) //exibe o erro caso o txtNomeGrupo seje nulo
-                {
-                    lblInforma.Text = "ERRO: Digite o nome do Grupo!";
-                }
-                else if (txtNomeGrupo.Text.Length > 20)   //exibe o erro caso o txtNomeGrupo passe de 20 caracters
-                {
-                    lblInforma.Text = "ERRO: Nome Muito longo!";
-                }
-                else if (txtNomePartida.Text.Any(c => carateres.Contains(c))) // faz a verificacao se algum caracteres do nome do jogador é invalido
-                {
-                    lblInforma.Text = "ERRO: Carcateres inválidos!";
-                }
-                else
-                {
-                    string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
-                    lblInforma.Text = "Partida Criada!";
-                }
-
+                lblInforma.Text = partida;
+                return;
             }
 
-
-            catch (Exception ex)
-            {
-                // Display the server error message
-                lblInforma.Text = ($"ERRO: {ex.Message}");
-            }
-
+            lblInforma.Text = "Partida Criada!";
         }
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
@@ -98,19 +91,13 @@ namespace Sistema_Autônomo_PI_III
             string nomeJogador = txtNomeJogador.Text;
             string senhaPartida = txtSenhaPartida.Text;
 
-            switch (VerificaEntrarPartida(nomeJogador, senhaPartida, txtIdPartida.Text))
+            int verificarEntrada = VerificaEntrarPartida(nomeJogador, senhaPartida, txtIdPartida.Text);
+            string verificar= Convert.ToString(verificarEntrada);
+
+            if (verificar.StartsWith("ERRO") || verificar.Contains("erro"))  // Verifica se o retorno contém erro
             {
-                case 0:
-                    break;
-                case 1:
-                    MessageBox.Show("Informe o ID da partida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                case 2:
-                    MessageBox.Show("Informe a senha da partida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                case 3:
-                    MessageBox.Show("Preencha o nome de jogador!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                lblInforma.Text = verificar;
+                return;
             }
 
             string jogador = Jogo.Entrar(idPartidaAtual, nomeJogador, senhaPartida);
@@ -123,9 +110,12 @@ namespace Sistema_Autônomo_PI_III
                 //txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
                 //txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
             }
-            else
+            else if(jogador.StartsWith("ERRO") || jogador.Contains("erro"))  // Verifica se o retorno contém erro
+                {
+                    lblInforma.Text = jogador;
+                    return;
+                }
             {
-                MessageBox.Show("Erro: Partida não encontrada!.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error); // Exibe mensagem de erro em caso de problema
             }
         }
 
@@ -197,42 +187,15 @@ namespace Sistema_Autônomo_PI_III
             
         }
 
-        private void lblNomeJogadorVez_Click(object sender, EventArgs e)
+        private void btnPersonagens_Click(object sender, EventArgs e)
         {
-
+            Personagens personagem = new Personagens();
+            personagem.ShowDialog();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void btnVoltar_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
-
-        private void btnPosicionarPersonagem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            IniciarPartida iniciar = new IniciarPartida();
-            iniciar.ShowDialog();
-        }
-        //posicionar personagem
-
     }
 }

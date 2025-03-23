@@ -16,6 +16,7 @@ namespace Sistema_Autônomo_PI_III
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new Menu());
         }
     }

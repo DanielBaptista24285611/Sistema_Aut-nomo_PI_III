@@ -80,7 +80,8 @@ namespace Sistema_Autônomo_PI_III
             this.lstSetores = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lstPersonagens = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPersonagens = new System.Windows.Forms.Button();
+            this.btnVoltar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNomePartida
@@ -393,7 +394,6 @@ namespace Sistema_Autônomo_PI_III
             this.lblNomeJogadorVez.Size = new System.Drawing.Size(106, 16);
             this.lblNomeJogadorVez.TabIndex = 49;
             this.lblNomeJogadorVez.Text = " Jogador da Vez";
-            this.lblNomeJogadorVez.Click += new System.EventHandler(this.lblNomeJogadorVez_Click);
             // 
             // btnColocarPersonagem
             // 
@@ -403,7 +403,6 @@ namespace Sistema_Autônomo_PI_III
             this.btnColocarPersonagem.TabIndex = 50;
             this.btnColocarPersonagem.Text = "Colocar Personagem";
             this.btnColocarPersonagem.UseVisualStyleBackColor = true;
-            this.btnColocarPersonagem.Click += new System.EventHandler(this.btnPosicionarPersonagem_Click);
             // 
             // txtSetor
             // 
@@ -422,7 +421,6 @@ namespace Sistema_Autônomo_PI_III
             this.label2.Size = new System.Drawing.Size(39, 16);
             this.label2.TabIndex = 52;
             this.label2.Text = "Setor";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -433,7 +431,6 @@ namespace Sistema_Autônomo_PI_III
             this.label3.Size = new System.Drawing.Size(85, 16);
             this.label3.TabIndex = 53;
             this.label3.Text = "Personagem";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtPersonagem
             // 
@@ -442,7 +439,6 @@ namespace Sistema_Autônomo_PI_III
             this.txtPersonagem.Name = "txtPersonagem";
             this.txtPersonagem.Size = new System.Drawing.Size(125, 22);
             this.txtPersonagem.TabIndex = 54;
-            this.txtPersonagem.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // btnPromover
             // 
@@ -531,7 +527,6 @@ namespace Sistema_Autônomo_PI_III
             this.label4.Size = new System.Drawing.Size(54, 16);
             this.label4.TabIndex = 63;
             this.label4.Text = "Setores";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // lstSetores
             // 
@@ -563,22 +558,33 @@ namespace Sistema_Autônomo_PI_III
             this.lstPersonagens.Size = new System.Drawing.Size(169, 228);
             this.lstPersonagens.TabIndex = 66;
             // 
-            // button1
+            // btnPersonagens
             // 
-            this.button1.Location = new System.Drawing.Point(946, 626);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 51);
-            this.button1.TabIndex = 67;
-            this.button1.Text = "Iniciar Partida";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnPersonagens.Location = new System.Drawing.Point(933, 637);
+            this.btnPersonagens.Name = "btnPersonagens";
+            this.btnPersonagens.Size = new System.Drawing.Size(138, 44);
+            this.btnPersonagens.TabIndex = 67;
+            this.btnPersonagens.Text = "Ver Personagens";
+            this.btnPersonagens.UseVisualStyleBackColor = true;
+            this.btnPersonagens.Click += new System.EventHandler(this.btnPersonagens_Click);
+            // 
+            // btnVoltar
+            // 
+            this.btnVoltar.Location = new System.Drawing.Point(838, 637);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(75, 46);
+            this.btnVoltar.TabIndex = 68;
+            this.btnVoltar.Text = "Voltar";
+            this.btnVoltar.UseVisualStyleBackColor = true;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 700);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVoltar);
+            this.Controls.Add(this.btnPersonagens);
             this.Controls.Add(this.lstPersonagens);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lstSetores);
@@ -694,7 +700,8 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.ListBox lstSetores;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox lstPersonagens;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPersonagens;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }
 
