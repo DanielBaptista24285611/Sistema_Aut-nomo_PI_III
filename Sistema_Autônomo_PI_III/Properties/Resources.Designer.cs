@@ -73,9 +73,9 @@ namespace Sistema_Autônomo_PI_III.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Cavaleiro1 {
+        internal static System.Drawing.Bitmap CaveleiroCavalo {
             get {
-                object obj = ResourceManager.GetObject("Cavaleiro1", resourceCulture);
+                object obj = ResourceManager.GetObject("CaveleiroCavalo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Sistema_Autônomo_PI_III.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CaveleiroCavalo {
+        internal static System.Drawing.Bitmap fundo_Menu {
             get {
-                object obj = ResourceManager.GetObject("CaveleiroCavalo", resourceCulture);
+                object obj = ResourceManager.GetObject("fundo_Menu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

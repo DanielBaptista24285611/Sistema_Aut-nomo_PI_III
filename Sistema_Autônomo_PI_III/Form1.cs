@@ -16,9 +16,11 @@ namespace Sistema_Autônomo_PI_III
         public Form1()
         {
             InitializeComponent();
-            lblversao.Text= Jogo.versao;
+            lblversao.Text = Jogo.versao;
             txtNomeGrupo.Text = "CavaleirosCanterbury";
+            lstSetores.Text = "10.Rei\n 5.Nobres\n 4.Dignatários \n 3.Oficiais \n 2.Mercadores \n 1.Artesãos \n 0.Pebleus";
         }
+
         int idPartidaAtual; //declara de maneira global idPartidaAtual
         string[] dadosPartida; //declara de maneira global dadosPartida
         string partida;
@@ -26,42 +28,45 @@ namespace Sistema_Autônomo_PI_III
 
         void btnCriar_Click(object sender, EventArgs e)
         {
-            carateres = ": ? * |¨¨ $ @ * ( ) # ; , % - _ ; < > ";
+            try
+            {
+                carateres = ": ? * |¨¨ $ @ * ( ) # ; , % - _ ; < > ";
 
-            if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))//exibe o erro caso o txtSenhaPartida seje nulo
-            {
-                lblInforma.Text = "ERRO: Senha está vazia!";
+                if (string.IsNullOrWhiteSpace(txtSenhaPartida.Text))//exibe o erro caso o txtSenhaPartida seje nulo
+                {
+                    lblInforma.Text = "ERRO: Senha está vazia!";
+                }
+                else if (string.IsNullOrWhiteSpace(txtNomeGrupo.Text)) //exibe o erro caso o txtNomeGrupo seje nulo
+                {
+                    lblInforma.Text = "ERRO: Digite o nome do Grupo!";
+                }
+                else if (txtNomeGrupo.Text.Length > 20)   //exibe o erro caso o txtNomeGrupo passe de 20 caracters
+                {
+                    lblInforma.Text = "ERRO: Nome Muito longo!";
+                }
+                else if (txtNomePartida.Text.Any(c => carateres.Contains(c))) // faz a verificacao se algum caracteres do nome do jogador é invalido
+                {
+                    lblInforma.Text = "ERRO: Carcateres inválidos!";
+                }
+                else
+                {
+                    string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
+                    lblInforma.Text = "Partida Criada!";
+                }
+
             }
-            else if (string.IsNullOrWhiteSpace(txtNomeGrupo.Text)) //exibe o erro caso o txtNomeGrupo seje nulo
+
+
+            catch (Exception ex)
             {
-                lblInforma.Text = "ERRO: Digite o nome do Grupo!";
+                // Display the server error message
+                lblInforma.Text = ($"ERRO: {ex.Message}");
             }
-            else if (txtNomeGrupo.Text.Length > 20)   //exibe o erro caso o txtNomeGrupo passe de 20 caracters
-            {
-                lblInforma.Text = "ERRO: Nome Muito longo!";
-            }
-            else if (txtNomePartida.Text.Any(c => carateres.Contains(c))) // faz a verificacao se algum caracteres do nome do jogador é invalido
-            {
-                lblInforma.Text = "ERRO: Carcateres inválidos!";
-            }
-            else
-            {
-                string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
-                lblInforma.Text= "Partida Criada!";
-            }
+
         }
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
             string retorno = Jogo.ListarPartidas("T");
-
-
             retorno = retorno.Replace("\r", "");
             retorno = retorno.Substring(0, retorno.Length - 1);
             string[] partidas = retorno.Split('\n');
@@ -70,9 +75,7 @@ namespace Sistema_Autônomo_PI_III
             for (int i = 0; i < partidas.Length; i++)
             {
                 lstPartidas.Items.Add(partidas[i]);
-
             }
-
         }
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
@@ -107,7 +110,7 @@ namespace Sistema_Autônomo_PI_III
                     return;
                 case 3:
                     MessageBox.Show("Preencha o nome de jogador!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;   
+                    return;
             }
 
             string jogador = Jogo.Entrar(idPartidaAtual, nomeJogador, senhaPartida);
@@ -117,14 +120,15 @@ namespace Sistema_Autônomo_PI_III
             {
                 lblidJogador.Text = $"ID do Jogador: {dadosJogador[0]}";   // Primeiro valor (ID) no lblIdJogador
                 lblsenha.Text = $"Senha: {dadosJogador[1]}";        // Segundo valor (senha) no lblSenha
-                txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
-                txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
+                //txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
+                //txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
             }
             else
             {
                 MessageBox.Show("Erro: Partida não encontrada!.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error); // Exibe mensagem de erro em caso de problema
             }
         }
+
         private void lstPartidas_SelectedIndexChanged(object sender, EventArgs e)
         {
             partida = lstPartidas.SelectedItem.ToString();
@@ -138,7 +142,6 @@ namespace Sistema_Autônomo_PI_III
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
             int idJogador = Int32.Parse(txtIDjogador.Text);
-
 
             lblCartas.Text = Jogo.ListarCartas(idJogador, txtSenhaJogador.Text);
         }
@@ -167,14 +170,6 @@ namespace Sistema_Autônomo_PI_III
             return 0;
         }
 
-        private void btnVerificarVez_Click(object sender, EventArgs e)
-        {
-            string dados = Jogo.VerificarVez(idPartidaAtual);
-
-            string[] dadosSeparados = dados.Split(',');
-
-            lstVerificarVez.Text = dadosSeparados[0];
-        }
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
@@ -182,12 +177,62 @@ namespace Sistema_Autônomo_PI_III
             string retorno;
             retorno = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
             lblIDjogadorVez.Text = retorno;
+             lblNomeJogadorVez.Text = $" {txtNomeJogador.Text}";
             MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void lblInforma_Click(object sender, EventArgs e)
+        private void btnVerificarVez_Click(object sender, EventArgs e)
+        {
+            idPartidaAtual = Convert.ToInt32(dadosPartida[0]); // converte o id da partida
+
+            string retorno = Jogo.VerificarVez(idPartidaAtual);  //cria uma string para receber o id
+            retorno = retorno.Replace("\r", "");  // cria espaço entre cada verificaçao
+            string[] verificar = retorno.Split('\n');
+
+            lstVerificarVez.Items.Clear();  //limpa os itens anteriores da listbox
+            for (int i = 0; i < verificar.Length; i++)
+            {
+                lstVerificarVez.Items.Add(verificar[i]); //Verifica a vez do jogador
+            }
+            
+        }
+
+        private void lblNomeJogadorVez_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPosicionarPersonagem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IniciarPartida iniciar = new IniciarPartida();
+            iniciar.ShowDialog();
+        }
+        //posicionar personagem
+
     }
 }
