@@ -93,6 +93,9 @@
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Personagens.resx">
+      <DependentUpon>Personagens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -118,6 +121,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Cavaleiro.ico" />
+    <None Include="Imagens\Tabuleiro Parte 10.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 5.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 4.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 3.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 2.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 1.jpeg" />
+    <None Include="Imagens\Tabuleiro Parte 0.jpeg" />
+    <None Include="Imagens\Tabuleiro.jpeg" />
+    <None Include="Imagens\Carta R.jpeg" />
+    <None Include="Imagens\Carta B.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Imagens\Carta D.jpeg" />
+    <None Include="Imagens\Carta E.jpeg" />
+    <None Include="Imagens\Carta G.jpeg" />
+    <None Include="Imagens\Carta I.jpeg" />
+    <None Include="Imagens\Carta K.jpeg" />
+    <None Include="Imagens\Carta M.jpeg" />
+    <None Include="Imagens\Carta Q.jpeg" />
+    <None Include="Imagens\Carta A.jpeg" />
+    <None Include="Imagens\Carta T.jpeg" />
+    <None Include="Imagens\Carta V.jpeg" />
+    <None Include="Imagens\Carta Z.jpeg" />
     <Content Include="Imagens\Cavaleiro.png" />
     <Content Include="Imagens\CaveleiroCavalo.png" />
     <Content Include="Imagens\fundo_Menu.png" />

@@ -53,3 +53,5 @@ C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III-345\Sistema_Autônomo_PI_III
 C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III-345\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Menu.resources
 C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III-345\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.IniciarPartida.resources
 C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Menu.resources
+C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\bin\Debug\Imagens\Carta B.jpeg
+C:\Users\silva\source\repos\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Personagens.resources

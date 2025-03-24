@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,11 +14,16 @@ namespace Sistema_Autônomo_PI_III
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private Personagens personagensForm;
+
+        public Form1(Personagens formPersonagens)
         {
             InitializeComponent();
             lblversao.Text = Jogo.versao;
             txtNomeGrupo.Text = "CavaleirosCanterbury";
+
+            this.personagensForm = formPersonagens;
+
 
             string setores = Jogo.ListarSetores();
             string[] listaSetores = setores.Split('\n'); // Supondo que os setores estão separados por quebras de linha.
@@ -41,13 +47,13 @@ namespace Sistema_Autônomo_PI_III
         int idPartidaAtual; //declara de maneira global idPartidaAtual
         string[] dadosPartida; //declara de maneira global dadosPartida
         string partida;
-        private string carateres;
+        //private string carateres;
 
         void btnCriar_Click(object sender, EventArgs e)
         {
 
             string partida = Jogo.CriarPartida($"{txtNomePartida.Text}", $"{txtSenhaPartida.Text}", "CavaleirosCanterbury");
-           
+
 
             if (partida.StartsWith("ERRO") || partida.Contains("erro"))  // Verifica se o retorno contém erro
             {
@@ -92,7 +98,7 @@ namespace Sistema_Autônomo_PI_III
             string senhaPartida = txtSenhaPartida.Text;
 
             int verificarEntrada = VerificaEntrarPartida(nomeJogador, senhaPartida, txtIdPartida.Text);
-            string verificar= Convert.ToString(verificarEntrada);
+            string verificar = Convert.ToString(verificarEntrada);
 
             if (verificar.StartsWith("ERRO") || verificar.Contains("erro"))  // Verifica se o retorno contém erro
             {
@@ -110,11 +116,11 @@ namespace Sistema_Autônomo_PI_III
                 //txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
                 //txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
             }
-            else if(jogador.StartsWith("ERRO") || jogador.Contains("erro"))  // Verifica se o retorno contém erro
-                {
-                    lblInforma.Text = jogador;
-                    return;
-                }
+            else if (jogador.StartsWith("ERRO") || jogador.Contains("erro"))  // Verifica se o retorno contém erro
+            {
+                lblInforma.Text = jogador;
+                return;
+            }
             {
             }
         }
@@ -167,9 +173,23 @@ namespace Sistema_Autônomo_PI_III
             string retorno;
             retorno = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
             lblIDjogadorVez.Text = retorno;
-             lblNomeJogadorVez.Text = $" {txtNomeJogador.Text}";
+            lblNomeJogadorVez.Text = $" {txtNomeJogador.Text}";
             MessageBox.Show("Partida Iniciada!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private Dictionary<string, string> mapaPersonagens = new Dictionary<string, string>
+{
+    { "A", "Carta A.jpeg" },
+    { "B", "Carta B.jpeg" },
+    { "D", "Carta D.jpeg" },
+    { "E", "Carta E.jpeg" },
+    { "G", "Carta G.jpeg" },
+    { "I", "Carta I.jpeg" },
+    { "K", "Carta K.jpeg" },
+    { "M", "Carta M.jpeg" },
+    { "Q", "Carta Q.jpeg" }
+
+};
 
         private void btnVerificarVez_Click(object sender, EventArgs e)
         {
@@ -183,9 +203,72 @@ namespace Sistema_Autônomo_PI_III
             for (int i = 0; i < verificar.Length; i++)
             {
                 lstVerificarVez.Items.Add(verificar[i]); //Verifica a vez do jogador
+
             }
-            
         }
+
+        private void CriarJogador(int setor, string nomeJogador, string imagemPersonagem)
+        {
+
+            if (personagensForm.setores.TryGetValue(setor, out Point posicao))  // Obtém a posição do setor
+            {
+                PictureBox jogadorPictureBox = new PictureBox
+                {
+                    Size = new Size(37, 63),  // Define o tamanho da imagem
+                    Location = posicao,  // Posição correta do jogador
+                    BackgroundImage = Image.FromFile("Imagens/" + imagemPersonagem), // Carrega a imagem
+                    BackgroundImageLayout = ImageLayout.Stretch,  // Ajusta o tamanho
+                    Name = nomeJogador
+                };
+
+                // Adiciona ao formulário
+                this.Controls.Add(jogadorPictureBox);
+            }
+        }
+
+        private void btnColocarPersonagem_Click(object sender, EventArgs e)
+        {
+            // Captura os valores dos campos de entrada
+            int jogador = Convert.ToInt32(txtIDjogador.Text);  // ID do jogador
+            string senha = txtSenhaPartida.Text;  // Senha do jogador
+            int setor = Convert.ToInt32(txtSetor.Text);  // Setor escolhido pelo jogador
+            string letraPersonagem = txtPersonagem.Text.ToUpper();  // Letra escolhida pelo jogador
+
+            // Verifica se a letra digitada corresponde a um personagem válido
+            /*if (mapaPersonagens.TryGetValue(letraPersonagem, out string imagemPersonagem))
+            {*/
+            // Envia o comando para o servidor para posicionar o personagem
+            string resposta = Jogo.ColocarPersonagem(jogador, senha, setor, letraPersonagem);
+
+            // Verifica se houve erro ao posicionar
+            if (resposta.StartsWith("ERRO"))
+            {
+                MessageBox.Show(resposta, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // Se tudo estiver certo, posiciona o personagem no tabuleiro
+                //CriarJogador(setor, "Jogador" + jogador, letraPersonagem);
+                resposta = resposta.Replace("\r", "");  // cria espaço entre cada verificaçao
+                string[] posionar = resposta.Split('\n');
+
+                //lstVerificarVez.Items.Clear();  //limpa os itens anteriores da listbox
+                for (int i = 0; i < posionar.Length; i++)
+                {
+                    lstVerificarVez.Items.Add(posionar[i]); //Verifica a vez do jogador
+
+                }
+
+            }
+        
+            
+                MessageBox.Show("Personagem inválido! Escolha uma letra correta.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+       }
+
+    
+
+        
 
         private void btnPersonagens_Click(object sender, EventArgs e)
         {

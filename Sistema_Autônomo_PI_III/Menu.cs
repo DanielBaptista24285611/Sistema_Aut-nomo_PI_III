@@ -29,7 +29,8 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnLobby_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            Personagens personagensForm = new Personagens(); // Cria uma instância de Personagens
+            Form1 form1 = new Form1(personagensForm);
             form1.ShowDialog();
         }
 
