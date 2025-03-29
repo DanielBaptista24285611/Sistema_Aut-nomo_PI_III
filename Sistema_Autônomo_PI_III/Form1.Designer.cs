@@ -403,6 +403,7 @@ namespace Sistema_Autônomo_PI_III
             this.btnColocarPersonagem.TabIndex = 50;
             this.btnColocarPersonagem.Text = "Colocar Personagem";
             this.btnColocarPersonagem.UseVisualStyleBackColor = true;
+            this.btnColocarPersonagem.Click += new System.EventHandler(this.btnColocarPersonagem_Click);
             // 
             // txtSetor
             // 

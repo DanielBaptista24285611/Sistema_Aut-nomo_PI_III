@@ -113,8 +113,8 @@ namespace Sistema_Autônomo_PI_III
             {
                 lblidJogador.Text = $"ID do Jogador: {dadosJogador[0]}";   // Primeiro valor (ID) no lblIdJogador
                 lblsenha.Text = $"Senha: {dadosJogador[1]}";        // Segundo valor (senha) no lblSenha
-                //txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
-                //txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
+                txtIDjogador.Text = dadosJogador[0];    // Preenche a textbox com o id do jogador
+                txtSenhaJogador.Text = dadosJogador[1]; // Preenche a textbox com a senha do jogador
             }
             else if (jogador.StartsWith("ERRO") || jogador.Contains("erro"))  // Verifica se o retorno contém erro
             {
@@ -228,47 +228,82 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnColocarPersonagem_Click(object sender, EventArgs e)
         {
-            // Captura os valores dos campos de entrada
-            int jogador = Convert.ToInt32(txtIDjogador.Text);  // ID do jogador
-            string senha = txtSenhaPartida.Text;  // Senha do jogador
-            int setor = Convert.ToInt32(txtSetor.Text);  // Setor escolhido pelo jogador
-            string letraPersonagem = txtPersonagem.Text.ToUpper();  // Letra escolhida pelo jogador
-
-            // Verifica se a letra digitada corresponde a um personagem válido
-            /*if (mapaPersonagens.TryGetValue(letraPersonagem, out string imagemPersonagem))
-            {*/
-            // Envia o comando para o servidor para posicionar o personagem
-            string resposta = Jogo.ColocarPersonagem(jogador, senha, setor, letraPersonagem);
-
-            // Verifica se houve erro ao posicionar
-            if (resposta.StartsWith("ERRO"))
+            if (string.IsNullOrEmpty(txtSetor.Text) || string.IsNullOrEmpty(txtPersonagem.Text))
             {
-                MessageBox.Show(resposta, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Informe o Setor e o Personagem.");
+                return;
             }
-            else
-            {
-                // Se tudo estiver certo, posiciona o personagem no tabuleiro
-                //CriarJogador(setor, "Jogador" + jogador, letraPersonagem);
-                resposta = resposta.Replace("\r", "");  // cria espaço entre cada verificaçao
-                string[] posionar = resposta.Split('\n');
 
-                //lstVerificarVez.Items.Clear();  //limpa os itens anteriores da listbox
-                for (int i = 0; i < posionar.Length; i++)
+            // Converte o ID do jogador para inteiro
+            int jogador1;
+            if (!int.TryParse(txtIDjogador.Text, out jogador1))
+            {
+                MessageBox.Show("O ID do jogador deve ser um número válido.");
+                return;
+            }
+
+            string senha = txtSenhaJogador.Text; // Obtém a senha do jogador
+
+            // Obtém os setores disponíveis
+            string setoresStr = Jogo.ListarSetores().Replace("\r", "");
+            string[] setores = setoresStr.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Obtém os personagens disponíveis
+            string personagensStr = Jogo.ListarPersonagens().Replace("\r", "");
+            string[] personagens = personagensStr.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Criar uma lista apenas com os IDs dos setores
+            List<int> idsSetores = new List<int>();
+            foreach (string setor in setores)
+            {
+                string[] partes = setor.Split(',');
+                if (partes.Length > 1 && int.TryParse(partes[0], out int idSetor))
                 {
-                    lstVerificarVez.Items.Add(posionar[i]); //Verifica a vez do jogador
-
+                    idsSetores.Add(idSetor);
                 }
-
             }
-        
-            
-                MessageBox.Show("Personagem inválido! Escolha uma letra correta.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
-       }
 
-    
+            // Converter txtSetor.Text para número
+            int setorSelecionado;
+            if (!int.TryParse(txtSetor.Text, out setorSelecionado) || !idsSetores.Contains(setorSelecionado))
+            {
+                MessageBox.Show("O setor digitado não é válido.");
+                return;
+            }
 
-        
+            // Pegar apenas a primeira letra do personagem digitado
+            string personagemSelecionado = txtPersonagem.Text.Trim();
+            if (string.IsNullOrEmpty(personagemSelecionado))
+            {
+                MessageBox.Show("O personagem digitado não pode estar vazio.");
+                return;
+            }
+
+            personagemSelecionado = personagemSelecionado.Substring(0, 1).ToUpper(); // Apenas a primeira letra
+
+            // Verificar se essa letra está na lista de personagens
+            bool personagemValido = personagens.Any(p => p.StartsWith(personagemSelecionado, StringComparison.OrdinalIgnoreCase));
+
+            if (!personagemValido)
+            {
+                MessageBox.Show("O personagem digitado não é válido.");
+                return;
+            }
+
+            // Chama o método para posicionar o personagem
+            string resultado = Jogo.ColocarPersonagem(jogador1, senha, setorSelecionado, personagemSelecionado);
+
+            // Atualiza a ListBox lstVerificarVez com o personagem e setor escolhidos
+            lstVerificarVez.Items.Clear();
+        }
+
+
+
+
+
+
+
+
 
         private void btnPersonagens_Click(object sender, EventArgs e)
         {
