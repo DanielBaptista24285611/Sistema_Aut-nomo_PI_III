@@ -42,41 +42,13 @@ namespace Sistema_Autônomo_PI_III
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (rodadaAtual == null) return;
-
-            if (rodadaAtual.FaseAtual == FaseRodada.Promocao && personagensTabuleiro.Any())
-            {
-                foreach (var personagem in personagensTabuleiro.ToList())
-                {
-                    if (rodadaAtual.PromoverPersonagem(personagem))
-                    {
-                        personagensTabuleiro.Remove(personagem);
-                        if (rodadaAtual.PersonagensPromovidos.Count >= 3)
-                            break;
-                    }
-                }
-                AtualizarStatusRodada();
-            }
-            else if (rodadaAtual.FaseAtual == FaseRodada.Votacao && jogadores.Any())
-            {
-                foreach (var jogador in jogadores)
-                {
-                    rodadaAtual.RegistrarVoto(jogador, true); // sempre vota "Sim"
-                }
-
-                AtualizarStatusRodada();
-
-                if (rodadaAtual.TodosVotaram(jogadores))
-                {
-                    string resultado = rodadaAtual.ResultadoVotacao();
-                    MessageBox.Show($"Resultado da votação: {resultado}", "Fim da Votação");
-                    timerAutomatizador.Stop();
-                    btnIniciarAutomacao.BackColor = SystemColors.Control; // volta à cor normal
-                }
-            }
+            AutomatizarEtapas();
         }
 
-
+        private void AutomatizarEtapas()
+        {
+            throw new NotImplementedException();
+        }
 
         private void AutomatizarEtapas(object sender, EventArgs e)
         {
@@ -338,6 +310,6 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
-        
+
     }
 }
