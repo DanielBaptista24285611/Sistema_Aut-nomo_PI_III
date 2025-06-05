@@ -1,4 +1,4 @@
-// Form1.cs - versão final otimizada com automação funcionando
+// Form1.cs
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,8 +24,10 @@ namespace Sistema_Autônomo_PI_III
             InitializeComponent();
             lblversao.Text = Jogo.versao;
             txtNomeGrupo.Text = "CavaleirosCanterbury";
+
             rodadaAtual = new Rodada(1, "");
-            personagensForm = formPersonagens;
+            this.personagensForm = formPersonagens;
+
             AtualizarListasIniciais();
             InicializarTimer();
         }
@@ -34,62 +36,70 @@ namespace Sistema_Autônomo_PI_III
         {
             timerAutomatizador = new Timer();
             timerAutomatizador.Interval = 3000;
-            timerAutomatizador.Tick += tmrAutomatizador_Tick;
+            timerAutomatizador.Tick += AutomatizarEtapas;
+            timerAutomatizador.Stop(); // Agora o timer só começa com o botão
         }
 
-        private void tmrAutomatizador_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             AutomatizarEtapas();
-
         }
 
-private void AutomatizarEtapas()
-{
-    if (rodadaAtual == null) return;
-
-    if (rodadaAtual.FaseAtual == FaseRodada.Promocao && personagensTabuleiro.Any())
-    {
-        string personagem = personagensTabuleiro[0];
-        if (rodadaAtual.PromoverPersonagem(personagem))
+        private void AutomatizarEtapas()
         {
-            personagensTabuleiro.RemoveAt(0);
-            AtualizarStatusRodada();
+            throw new NotImplementedException();
         }
-    }
-    else if (rodadaAtual.FaseAtual == FaseRodada.Votacao && jogadores.Any())
-    {
-        foreach (var jogador in jogadores)
-            rodadaAtual.RegistrarVoto(jogador, true);
 
-        AtualizarStatusRodada();
-
-        if (rodadaAtual.TodosVotaram(jogadores))
+        private void AutomatizarEtapas(object sender, EventArgs e)
         {
-            string resultado = rodadaAtual.ResultadoVotacao();
-            MessageBox.Show($"Resultado da votação: {resultado}", "Fim da Votação");
+            if (rodadaAtual == null) return;
+
+            if (rodadaAtual.FaseAtual == FaseRodada.Promocao && personagensTabuleiro.Any())
+            {
+                foreach (var personagem in personagensTabuleiro.ToList())
+                {
+                    if (rodadaAtual.PromoverPersonagem(personagem))
+                    {
+                        personagensTabuleiro.Remove(personagem);
+                        if (rodadaAtual.PersonagensPromovidos.Count >= 3)
+                            break;
+                    }
+                }
+                AtualizarStatusRodada();
+            }
+            else if (rodadaAtual.FaseAtual == FaseRodada.Votacao && jogadores.Any())
+            {
+                foreach (var jogador in jogadores)
+                {
+                    rodadaAtual.RegistrarVoto(jogador, true);
+                }
+
+                AtualizarStatusRodada();
+
+                if (rodadaAtual.TodosVotaram(jogadores))
+                {
+                    string resultado = rodadaAtual.ResultadoVotacao();
+                    MessageBox.Show($"Resultado da votação: {resultado}", "Fim da Votação");
+                    timerAutomatizador.Stop();
+                }
+            }
         }
-    }
-}
-
-
 
         private void AtualizarListasIniciais()
         {
             lstSetores.Items.Clear();
             foreach (var setor in Jogo.ListarSetores().Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(setor))
                     lstSetores.Items.Add(setor);
+            }
 
             lstPersonagens.Items.Clear();
             foreach (var personagem in Jogo.ListarPersonagens().Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(personagem))
                     lstPersonagens.Items.Add(personagem);
-        }
-
-        private void AtualizarStatusRodada()
-        {
-            lstVerificarVez.Items.Clear();
-            lstVerificarVez.Items.Add(rodadaAtual.ToString());
+            }
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
@@ -103,8 +113,10 @@ private void AutomatizarEtapas()
             lstPartidas.Items.Clear();
             string retorno = Jogo.ListarPartidas("T").Replace("\r", "").Trim();
             foreach (var partida in retorno.Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(partida))
                     lstPartidas.Items.Add(partida);
+            }
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -135,12 +147,10 @@ private void AutomatizarEtapas()
             AtualizarStatusRodada();
         }
 
-        private int VerificaEntrarPartida(string nomeJogador, string senhaPartida, string idPartida)
+        private void AtualizarStatusRodada()
         {
-            if (string.IsNullOrWhiteSpace(idPartida)) return 1;
-            if (string.IsNullOrWhiteSpace(senhaPartida)) return 2;
-            if (string.IsNullOrWhiteSpace(nomeJogador)) return 3;
-            return 0;
+            lstVerificarVez.Items.Clear();
+            lstVerificarVez.Items.Add(rodadaAtual.ToString());
         }
 
         private void btnListarJogadores_Click(object sender, EventArgs e)
@@ -149,8 +159,10 @@ private void AutomatizarEtapas()
             lstJogadores.Items.Clear();
             string retorno = Jogo.ListarJogadores(idPartidaAtual).Replace("\r", "");
             foreach (var jogador in retorno.Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(jogador))
                     lstJogadores.Items.Add(jogador);
+            }
         }
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
@@ -160,6 +172,14 @@ private void AutomatizarEtapas()
             lblIDjogadorVez.Text = retorno;
             lblNomeJogadorVez.Text = txtNomeJogador.Text;
             MessageBox.Show("Partida Iniciada!", "Info");
+        }
+
+        private int VerificaEntrarPartida(string nomeJogador, string senhaPartida, string idPartida)
+        {
+            if (string.IsNullOrWhiteSpace(idPartida)) return 1;
+            if (string.IsNullOrWhiteSpace(senhaPartida)) return 2;
+            if (string.IsNullOrWhiteSpace(nomeJogador)) return 3;
+            return 0;
         }
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
@@ -174,8 +194,10 @@ private void AutomatizarEtapas()
             lstVerificarVez.Items.Clear();
             string retorno = Jogo.VerificarVez(idPartidaAtual).Replace("\r", "");
             foreach (var vez in retorno.Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(vez))
                     lstVerificarVez.Items.Add(vez);
+            }
         }
 
         private void btnColocarPersonagem_Click(object sender, EventArgs e)
@@ -198,12 +220,14 @@ private void AutomatizarEtapas()
 
             string resultado = Jogo.ColocarPersonagem(idJogador, senha, setorSelecionado, personagem);
             MessageBox.Show(resultado);
+
             personagensTabuleiro.Add(personagem);
         }
 
         private void btnPromover_Click(object sender, EventArgs e)
         {
             string personagem = txtPersonagem.Text;
+
             if (rodadaAtual.PodePromover() && rodadaAtual.PromoverPersonagem(personagem))
             {
                 MessageBox.Show($"{personagem} promovido com sucesso!");
@@ -244,22 +268,6 @@ private void AutomatizarEtapas()
             }
         }
 
-        private void btnIniciarAutomacao_Click(object sender, EventArgs e)
-        {
-            if (!timerAutomatizador.Enabled)
-            {
-                timerAutomatizador.Start();
-                btnIniciarAutomacao.BackColor = Color.LightBlue;
-                MessageBox.Show("Automação iniciada!", "Info");
-            }
-            else
-            {
-                timerAutomatizador.Stop();
-                btnIniciarAutomacao.BackColor = SystemColors.Control;
-                MessageBox.Show("Automação parada!", "Info");
-            }
-        }
-
         private void lstPartidas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstPartidas.SelectedItem != null)
@@ -272,7 +280,10 @@ private void AutomatizarEtapas()
             }
         }
 
-        private void btnVoltar_Click(object sender, EventArgs e) => Close();
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         private void btnPersonagens_Click(object sender, EventArgs e)
         {
@@ -282,5 +293,23 @@ private void AutomatizarEtapas()
 
         private void lstJogadores_SelectedIndexChanged(object sender, EventArgs e) { }
         private void lstVerificarVez_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void btnIniciarAutomacao_Click(object sender, EventArgs e)
+        {
+            if (!timerAutomatizador.Enabled)
+            {
+                timerAutomatizador.Start();
+                btnIniciarAutomacao.BackColor = Color.LightBlue; // azul claro
+                MessageBox.Show("Automação iniciada!", "Info");
+            }
+            else
+            {
+                timerAutomatizador.Stop();
+                btnIniciarAutomacao.BackColor = SystemColors.Control; // cor padrão
+                MessageBox.Show("Automação parada!", "Info");
+            }
+        }
+
+
     }
 }
