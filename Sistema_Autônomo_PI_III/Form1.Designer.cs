@@ -406,7 +406,7 @@ namespace Sistema_Autônomo_PI_III
             this.btnIniciarJogo.TabIndex = 73;
             this.btnIniciarJogo.Text = "🎮Iniciar Jogo";
             this.btnIniciarJogo.UseVisualStyleBackColor = false;
-            this.btnIniciarJogo.Click += new System.EventHandler(this.btnIniciarJogo_Click_1);
+            this.btnIniciarJogo.Click += new System.EventHandler(this.btnIniciarJogo_Click);
             // 
             // Form1
             // 

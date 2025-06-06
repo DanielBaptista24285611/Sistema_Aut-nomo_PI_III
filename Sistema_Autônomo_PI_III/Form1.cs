@@ -120,65 +120,25 @@ namespace Sistema_Autônomo_PI_III
         {
             try
             {
-                // 1. Validações iniciais
-                if (string.IsNullOrEmpty(txtIDjogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
-                {
-                    MessageBox.Show("Preencha ID e senha do jogador.", "Erro");
-                    return;
-                }
-
-                // 2. Verifica se a partida existe e tem jogadores suficientes
-                if (idPartidaAtual == 0)
-                {
-                    MessageBox.Show("Nenhuma partida selecionada.", "Erro");
-                    return;
-                }
-
-                string listaJogadores = Jogo.ListarJogadores(idPartidaAtual).Replace("\r", "").Trim();
-                if (string.IsNullOrEmpty(listaJogadores) || listaJogadores.Contains("ERRO"))
-                {
-                    MessageBox.Show("Partida não encontrada ou inválida.", "Erro");
-                    return;
-                }
-
-                string[] jogadores = listaJogadores.Split('\n');
-                if (jogadores.Length < 2)
-                {
-                    MessageBox.Show("A partida precisa de pelo menos 2 jogadores.", "Aviso");
-                    return;
-                }
-
-                // 3. Inicia a partida
+                // 1. Inicia a partida
                 int idJogador = int.Parse(txtIDjogador.Text);
                 string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
 
-                if (retornoInicio.StartsWith("ERRO"))
-                {
-                    MessageBox.Show($"Falha ao iniciar: {retornoInicio}", "Erro");
-                    return;
-                }
-
-                // 4. Atualiza a interface
-                lblIDjogadorVez.Text = retornoInicio;
-                lblNomeJogadorVez.Text = NomeJogador;
-
-                // 5. Atualiza a lista de turnos
+                // 2. Verifica e exibe a vez do jogador
                 lstVerificarVez.Items.Clear();
                 string retornoVez = Jogo.VerificarVez(idPartidaAtual).Replace("\r", "");
+
                 foreach (var vez in retornoVez.Split('\n'))
                 {
                     if (!string.IsNullOrWhiteSpace(vez))
                         lstVerificarVez.Items.Add(vez);
                 }
-
-                MessageBox.Show("Partida iniciada!", "Sucesso");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro crítico: {ex.Message}", "Erro");
+                MessageBox.Show($"Erro ao iniciar partida: {ex.Message}", "Erro");
             }
         }
-
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
