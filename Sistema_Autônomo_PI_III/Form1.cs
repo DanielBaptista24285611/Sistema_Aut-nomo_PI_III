@@ -16,17 +16,19 @@ namespace Sistema_Autônomo_PI_III
         private List<string> personagensTabuleiro = new List<string>();
         private List<string> jogadores = new List<string>();
         private int idPartidaAtual;
-        private string[] dadosPartida;
-        private string partida;
+        public string NomeJogador { get; set; }
 
-        public Form1(Personagens formPersonagens)
+
+        public Form1(Personagens formPersonagens, string idJogador, string senhaJogador)
         {
             InitializeComponent();
             lblversao.Text = Jogo.versao;
-            txtNomeGrupo.Text = "CavaleirosCanterbury";
 
             rodadaAtual = new Rodada(1, "");
             this.personagensForm = formPersonagens;
+
+            txtIDjogador.Text = idJogador;
+            txtSenhaJogador.Text = senhaJogador;
 
             AtualizarListasIniciais();
             InicializarTimer();
@@ -102,85 +104,81 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
-        private void btnCriar_Click(object sender, EventArgs e)
-        {
-            string retorno = Jogo.CriarPartida(txtNomePartida.Text, txtSenhaPartida.Text, txtNomeGrupo.Text);
-            lblInforma.Text = retorno.StartsWith("ERRO") || retorno.Contains("erro") ? retorno : "Partida Criada!";
-        }
 
-        private void btnListarPartidas_Click(object sender, EventArgs e)
-        {
-            lstPartidas.Items.Clear();
-            string retorno = Jogo.ListarPartidas("T").Replace("\r", "").Trim();
-            foreach (var partida in retorno.Split('\n'))
-            {
-                if (!string.IsNullOrWhiteSpace(partida))
-                    lstPartidas.Items.Add(partida);
-            }
-        }
 
-        private void btnEntrar_Click(object sender, EventArgs e)
-        {
-            if (VerificaEntrarPartida(txtNomeJogador.Text, txtSenhaPartida.Text, txtIdPartida.Text) != 0)
-            {
-                MessageBox.Show("Preencha todos os campos corretamente.");
-                return;
-            }
-
-            idPartidaAtual = int.Parse(txtIdPartida.Text);
-            string resposta = Jogo.Entrar(idPartidaAtual, txtNomeJogador.Text, txtSenhaPartida.Text);
-
-            if (resposta.StartsWith("ERRO") || resposta.Contains("erro"))
-            {
-                lblInforma.Text = resposta;
-                return;
-            }
-
-            var dadosJogador = resposta.Split(',');
-            txtIDjogador.Text = dadosJogador[0];
-            txtSenhaJogador.Text = dadosJogador[1];
-            lblidJogador.Text = $"ID: {dadosJogador[0]}";
-            lblsenha.Text = $"Senha: {dadosJogador[1]}";
-
-            jogadores.Add(txtNomeJogador.Text);
+            /*jogadores.Add(txtNomeJogador.Text);
             rodadaAtual = new Rodada(1, txtNomeJogador.Text);
-            AtualizarStatusRodada();
-        }
+            AtualizarStatusRodada();*/
+        
 
         private void AtualizarStatusRodada()
         {
             lstVerificarVez.Items.Clear();
             lstVerificarVez.Items.Add(rodadaAtual.ToString());
         }
-
-        private void btnListarJogadores_Click(object sender, EventArgs e)
+        private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-            if (idPartidaAtual == 0) return;
-            lstJogadores.Items.Clear();
-            string retorno = Jogo.ListarJogadores(idPartidaAtual).Replace("\r", "");
-            foreach (var jogador in retorno.Split('\n'))
+            try
             {
-                if (!string.IsNullOrWhiteSpace(jogador))
-                    lstJogadores.Items.Add(jogador);
+                // 1. Validações iniciais
+                if (string.IsNullOrEmpty(txtIDjogador.Text) || string.IsNullOrEmpty(txtSenhaJogador.Text))
+                {
+                    MessageBox.Show("Preencha ID e senha do jogador.", "Erro");
+                    return;
+                }
+
+                // 2. Verifica se a partida existe e tem jogadores suficientes
+                if (idPartidaAtual == 0)
+                {
+                    MessageBox.Show("Nenhuma partida selecionada.", "Erro");
+                    return;
+                }
+
+                string listaJogadores = Jogo.ListarJogadores(idPartidaAtual).Replace("\r", "").Trim();
+                if (string.IsNullOrEmpty(listaJogadores) || listaJogadores.Contains("ERRO"))
+                {
+                    MessageBox.Show("Partida não encontrada ou inválida.", "Erro");
+                    return;
+                }
+
+                string[] jogadores = listaJogadores.Split('\n');
+                if (jogadores.Length < 2)
+                {
+                    MessageBox.Show("A partida precisa de pelo menos 2 jogadores.", "Aviso");
+                    return;
+                }
+
+                // 3. Inicia a partida
+                int idJogador = int.Parse(txtIDjogador.Text);
+                string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+
+                if (retornoInicio.StartsWith("ERRO"))
+                {
+                    MessageBox.Show($"Falha ao iniciar: {retornoInicio}", "Erro");
+                    return;
+                }
+
+                // 4. Atualiza a interface
+                lblIDjogadorVez.Text = retornoInicio;
+                lblNomeJogadorVez.Text = NomeJogador;
+
+                // 5. Atualiza a lista de turnos
+                lstVerificarVez.Items.Clear();
+                string retornoVez = Jogo.VerificarVez(idPartidaAtual).Replace("\r", "");
+                foreach (var vez in retornoVez.Split('\n'))
+                {
+                    if (!string.IsNullOrWhiteSpace(vez))
+                        lstVerificarVez.Items.Add(vez);
+                }
+
+                MessageBox.Show("Partida iniciada!", "Sucesso");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro crítico: {ex.Message}", "Erro");
             }
         }
 
-        private void btnIniciarJogo_Click(object sender, EventArgs e)
-        {
-            int idJogador = int.Parse(txtIDjogador.Text);
-            string retorno = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
-            lblIDjogadorVez.Text = retorno;
-            lblNomeJogadorVez.Text = txtNomeJogador.Text;
-            MessageBox.Show("Partida Iniciada!", "Info");
-        }
-
-        private int VerificaEntrarPartida(string nomeJogador, string senhaPartida, string idPartida)
-        {
-            if (string.IsNullOrWhiteSpace(idPartida)) return 1;
-            if (string.IsNullOrWhiteSpace(senhaPartida)) return 2;
-            if (string.IsNullOrWhiteSpace(nomeJogador)) return 3;
-            return 0;
-        }
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
@@ -249,7 +247,7 @@ namespace Sistema_Autônomo_PI_III
             }
 
             bool votoSim = voto == "S";
-            string jogador = txtNomeJogador.Text;
+            string jogador = NomeJogador; // Nome do jogador que está votando
 
             if (rodadaAtual.RegistrarVoto(jogador, votoSim))
             {
@@ -268,17 +266,7 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
-        private void lstPartidas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lstPartidas.SelectedItem != null)
-            {
-                partida = lstPartidas.SelectedItem.ToString();
-                dadosPartida = partida.Split(',');
-                idPartidaAtual = int.Parse(dadosPartida[0]);
-                lblInforma.Text = idPartidaAtual.ToString();
-                txtIdPartida.Text = idPartidaAtual.ToString();
-            }
-        }
+       
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -310,6 +298,11 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
+        private void txtNomePartida_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        
     }
 }
