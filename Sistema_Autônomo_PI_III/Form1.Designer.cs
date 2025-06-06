@@ -611,7 +611,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.tmrAutomatizador.Enabled = true;
             this.tmrAutomatizador.Interval = 5000;
-            this.tmrAutomatizador.Tick += new System.EventHandler(this.tmrAutomatizador_Tick);
+          //  this.tmrAutomatizador.Tick += new System.EventHandler(this.tmrAutomatizador_Tick);
             // 
             // Form1
             // 
