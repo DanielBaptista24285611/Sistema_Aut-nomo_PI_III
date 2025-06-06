@@ -148,6 +148,7 @@
     <None Include="Imagens\Carta Z.jpeg" />
     <Content Include="Imagens\Cavaleiro.png" />
     <Content Include="Imagens\CaveleiroCavalo.png" />
+    <Content Include="Imagens\fundo-menu.png" />
     <Content Include="Imagens\fundo_Menu.png" />
   </ItemGroup>
   <ItemGroup>
