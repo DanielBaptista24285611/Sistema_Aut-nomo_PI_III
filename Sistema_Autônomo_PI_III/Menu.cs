@@ -38,5 +38,11 @@ namespace Sistema_Autônomo_PI_III
         {
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Credito creditoForm = new Credito(); // Cria uma instância de Credito
+            creditoForm.ShowDialog();
+        }
     }
 }
