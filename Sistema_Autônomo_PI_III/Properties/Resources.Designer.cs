@@ -223,9 +223,19 @@ namespace Sistema_Autônomo_PI_III.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fundo_Menu {
+        internal static System.Drawing.Bitmap fundo_menu {
             get {
-                object obj = ResourceManager.GetObject("fundo_Menu", resourceCulture);
+                object obj = ResourceManager.GetObject("fundo-menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fundo_menu1 {
+            get {
+                object obj = ResourceManager.GetObject("fundo-menu1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
