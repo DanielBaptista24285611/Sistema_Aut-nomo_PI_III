@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnLobby = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCredito = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -70,16 +70,17 @@
             this.btnSair.UseVisualStyleBackColor = false;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
-            // button1
+            // btnCredito
             // 
-            this.button1.BackColor = System.Drawing.Color.Gold;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(274, 379);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 47);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Creditos";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnCredito.BackColor = System.Drawing.Color.Gold;
+            this.btnCredito.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCredito.Location = new System.Drawing.Point(274, 379);
+            this.btnCredito.Name = "btnCredito";
+            this.btnCredito.Size = new System.Drawing.Size(167, 47);
+            this.btnCredito.TabIndex = 3;
+            this.btnCredito.Text = "Creditos";
+            this.btnCredito.UseVisualStyleBackColor = false;
+            this.btnCredito.Click += new System.EventHandler(this.btnCredito_Click);
             // 
             // Menu
             // 
@@ -88,7 +89,7 @@
             this.BackgroundImage = global::Sistema_Autônomo_PI_III.Properties.Resources.fundo_menu1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(699, 575);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCredito);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.btnLobby);
             this.Controls.Add(this.label1);
@@ -106,6 +107,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLobby;
         private System.Windows.Forms.Button btnSair;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCredito;
     }
 }

@@ -88,3 +88,4 @@ C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_P
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_.44953B83.Up2Date
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.exe
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.pdb
+C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Credito.resources
