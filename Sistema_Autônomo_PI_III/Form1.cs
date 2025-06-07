@@ -120,23 +120,33 @@ namespace Sistema_Autônomo_PI_III
         {
             try
             {
-                // 1. Inicia a partida
-                int idJogador = int.Parse(txtIDjogador.Text);
-                string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
-
-                // 2. Verifica e exibe a vez do jogador
-                lstVerificarVez.Items.Clear();
-                string retornoVez = Jogo.VerificarVez(idPartidaAtual).Replace("\r", "");
-
-                foreach (var vez in retornoVez.Split('\n'))
+                // Validate input
+                if (!int.TryParse(txtIDjogador.Text, out int idJogador))
                 {
-                    if (!string.IsNullOrWhiteSpace(vez))
-                        lstVerificarVez.Items.Add(vez);
+                    MessageBox.Show("ID do jogador inválido!", "Erro");
+                    return;
                 }
+
+                // 1. Start the match
+                string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+                lblIDjogadorVez.Text = retornoInicio;
+                lblNomeJogadorVez.Text = NomeJogador; // Ensure this is properly initialized
+
+                // 2. Check and display player's turn
+                lstVerificarVez.Items.Clear();
+                string retornoVez = Jogo.VerificarVez(idPartidaAtual);
+
+                foreach (var vez in retornoVez.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    lstVerificarVez.Items.Add(vez);
+                }
+
+                MessageBox.Show("Partida Iniciada com sucesso!", "Info");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao iniciar partida: {ex.Message}", "Erro");
+                MessageBox.Show($"Erro ao iniciar jogo: {ex.Message}", "Erro");
+                // Consider logging the error
             }
         }
 
@@ -177,7 +187,13 @@ namespace Sistema_Autônomo_PI_III
             string senha = txtSenhaJogador.Text;
 
             string resultado = Jogo.ColocarPersonagem(idJogador, senha, setorSelecionado, personagem);
-            MessageBox.Show(resultado);
+            var linhas = resultado.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Adiciona cada linha separadamente
+            foreach (var linha in linhas)
+            {
+                lstVerificarVez.Items.Add(linha.Trim());
+            }
 
             personagensTabuleiro.Add(personagem);
         }
