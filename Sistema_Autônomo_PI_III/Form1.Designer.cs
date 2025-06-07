@@ -391,7 +391,6 @@ namespace Sistema_Autônomo_PI_III
             // 
             // tmrAutomatizador
             // 
-            this.tmrAutomatizador.Enabled = true;
             this.tmrAutomatizador.Interval = 5000;
             // 
             // btnIniciarJogo

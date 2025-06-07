@@ -57,7 +57,7 @@ public class Rodada
 
     public bool TodosVotaram(List<string> todosJogadores)
     {
-        return todosJogadores.All(j => jogadoresQueVotaram.Contains(j));
+        return todosJogadores.All(j => jogadoresQueVotaram.Contains(j.Trim().ToUpper()));
     }
 
     public int ObterTotalVotos()

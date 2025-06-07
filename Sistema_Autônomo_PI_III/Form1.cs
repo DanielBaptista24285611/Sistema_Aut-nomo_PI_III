@@ -104,8 +104,6 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
-
-
             /*jogadores.Add(txtNomeJogador.Text);
             rodadaAtual = new Rodada(1, txtNomeJogador.Text);
             AtualizarStatusRodada();*/
@@ -187,6 +185,9 @@ namespace Sistema_Autônomo_PI_III
             string senha = txtSenhaJogador.Text;
 
             string resultado = Jogo.ColocarPersonagem(idJogador, senha, setorSelecionado, personagem);
+
+            lstVerificarVez.Items.Clear();
+
             var linhas = resultado.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             // Adiciona cada linha separadamente
@@ -242,7 +243,22 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
-       
+        private void btnIniciarAutomacao_Click(object sender, EventArgs e)
+        {
+            if (!timerAutomatizador.Enabled)
+            {
+                timerAutomatizador.Start();
+                btnIniciarAutomacao.BackColor = Color.LightBlue;
+                MessageBox.Show("Automação iniciada!", "Info");
+            }
+            else
+            {
+                timerAutomatizador.Stop();
+                btnIniciarAutomacao.BackColor = SystemColors.Control;
+                MessageBox.Show("Automação parada!", "Info");
+            }
+        }
+
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -257,27 +273,6 @@ namespace Sistema_Autônomo_PI_III
 
         private void lstJogadores_SelectedIndexChanged(object sender, EventArgs e) { }
         private void lstVerificarVez_SelectedIndexChanged(object sender, EventArgs e) { }
-
-        private void btnIniciarAutomacao_Click(object sender, EventArgs e)
-        {
-            if (!timerAutomatizador.Enabled)
-            {
-                timerAutomatizador.Start();
-                btnIniciarAutomacao.BackColor = Color.LightBlue; // azul claro
-                MessageBox.Show("Automação iniciada!", "Info");
-            }
-            else
-            {
-                timerAutomatizador.Stop();
-                btnIniciarAutomacao.BackColor = SystemColors.Control; // cor padrão
-                MessageBox.Show("Automação parada!", "Info");
-            }
-        }
-
-        private void txtNomePartida_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         
     }
