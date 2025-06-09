@@ -5,7 +5,8 @@ using System.Linq;
 public enum FaseRodada
 {
     Promocao,
-    Votacao
+    Votacao,
+    Concluida
 }
 
 public class Rodada
@@ -29,6 +30,10 @@ public class Rodada
     {
         return PersonagensPromovidos.Count < 3;
     }
+    public void AvancarParaFase(FaseRodada novaFase)
+    {
+        FaseAtual = novaFase;
+    }
 
     public bool PromoverPersonagem(string nome)
     {
@@ -47,6 +52,7 @@ public class Rodada
 
     public bool RegistrarVoto(string jogador, bool voto)
     {
+        jogador = jogador.Trim().ToUpper();
         if (FaseAtual != FaseRodada.Votacao || jogadoresQueVotaram.Contains(jogador))
             return false;
 
@@ -64,6 +70,11 @@ public class Rodada
     {
         return votos.Count;
     }
+    public bool JaVotou(string jogador)
+    {
+        return votos.ContainsKey(jogador); // ou como for seu controle
+    }
+
 
     public string ResultadoVotacao()
     {

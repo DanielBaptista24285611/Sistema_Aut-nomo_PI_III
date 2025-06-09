@@ -10,25 +10,30 @@ namespace Sistema_Autônomo_PI_III
 {
     public partial class Form1 : Form
     {
-        private Personagens personagensForm;
+        private Personagens formPersonagens;
         private Rodada rodadaAtual;
         private Timer timerAutomatizador;
         private List<string> personagensTabuleiro = new List<string>();
         private List<string> jogadores = new List<string>();
+        private List<string> personagens = new List<string>()
+{
+    "A", "B", "D", "E", "G", "I", "K", "M", "Q","R", "T", "V", "Z"
+};
         private int idPartidaAtual;
         public string NomeJogador { get; set; }
 
 
-        public Form1(Personagens formPersonagens, string idJogador, string senhaJogador)
+        public Form1(Personagens formPersonagens, string idJogador, string senhaJogador, string nomeJogador)
         {
             InitializeComponent();
             lblversao.Text = Jogo.versao;
 
             rodadaAtual = new Rodada(1, "");
-            this.personagensForm = formPersonagens;
+            this.formPersonagens = formPersonagens;
 
             txtIDjogador.Text = idJogador;
             txtSenhaJogador.Text = senhaJogador;
+            NomeJogador = nomeJogador.Trim().ToUpper();
 
             AtualizarListasIniciais();
             InicializarTimer();
@@ -73,19 +78,26 @@ namespace Sistema_Autônomo_PI_III
             {
                 foreach (var jogador in jogadores)
                 {
-                    rodadaAtual.RegistrarVoto(jogador, true);
+                    if (!rodadaAtual.JaVotou(jogador))
+                    {
+                        rodadaAtual.RegistrarVoto(jogador, true);
+                    }
                 }
 
                 AtualizarStatusRodada();
 
                 if (rodadaAtual.TodosVotaram(jogadores))
                 {
+                    timerAutomatizador.Stop(); // <--- Pare o timer ANTES da MessageBox
+
                     string resultado = rodadaAtual.ResultadoVotacao();
                     MessageBox.Show($"Resultado da votação: {resultado}", "Fim da Votação");
-                    timerAutomatizador.Stop();
+
+                    rodadaAtual.AvancarParaFase(FaseRodada.Concluida);
                 }
-            }
+            }   
         }
+
 
         private void AtualizarListasIniciais()
         {
@@ -138,7 +150,9 @@ namespace Sistema_Autônomo_PI_III
                 {
                     lstVerificarVez.Items.Add(vez);
                 }
-
+                NomeJogador = Text.Trim().ToUpper();
+                if (!jogadores.Contains(NomeJogador))
+                    jogadores.Add(NomeJogador);
                 MessageBox.Show("Partida Iniciada com sucesso!", "Info");
             }
             catch (Exception ex)
