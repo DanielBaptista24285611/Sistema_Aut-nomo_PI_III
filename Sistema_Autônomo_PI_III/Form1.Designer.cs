@@ -268,6 +268,7 @@ namespace Sistema_Autônomo_PI_III
             this.btnHistorico.TabIndex = 61;
             this.btnHistorico.Text = "Histórico";
             this.btnHistorico.UseVisualStyleBackColor = true;
+            this.btnHistorico.Click += new System.EventHandler(this.btnHistorico_Click);
             // 
             // checkBox1
             // 

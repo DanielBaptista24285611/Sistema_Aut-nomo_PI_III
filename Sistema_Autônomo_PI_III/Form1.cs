@@ -273,6 +273,25 @@ namespace Sistema_Autônomo_PI_III
             }
         }
 
+        private void btnHistorico_Click(object sender, EventArgs e)
+        {
+            lstVerificarVez.Items.Clear();
+            lstVerificarVez.Items.Add("Histórico da partida:");
+
+            string historico = Jogo.ConsultarHistorico(idPartidaAtual, checkBox1.Checked);
+
+            if (string.IsNullOrWhiteSpace(historico) || historico.Contains("ERRO"))
+            {
+                lstVerificarVez.Items.Add("Nenhuma jogada realizada ainda.");
+            }
+            else
+            {
+                foreach (var linha in historico.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    lstVerificarVez.Items.Add(linha);
+                }
+            }
+        }
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
