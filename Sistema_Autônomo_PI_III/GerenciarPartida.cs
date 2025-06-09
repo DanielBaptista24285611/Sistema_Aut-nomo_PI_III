@@ -140,7 +140,7 @@ namespace Sistema_Autônomo_PI_III
             // Abre diretamente a tela de Personagens e depois Form1
             Personagens personagensForm = new Personagens();
             string nomeJogador = txtNomeJogador.Text;
-            var form1 = new Form1(personagensForm, idJogador, senhaJogador, nomeJogador);
+            var form1 = new ExecutarPartida(personagensForm, idJogador, senhaJogador, nomeJogador);
             form1.NomeJogador = txtNomeJogador.Text;
             form1.Show();
                 
@@ -173,5 +173,22 @@ namespace Sistema_Autônomo_PI_III
         {
 
         }
+
+        private void lstPartidas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        
+            if (lstPartidas.SelectedItem != null)
+            {
+                string itemSelecionado = lstPartidas.SelectedItem.ToString();
+                string[] dados = itemSelecionado.Split(',');
+
+                if (dados.Length > 0)
+                {
+                    txtIdPartida.Text = dados[0].Trim(); // ID da partida é o primeiro campo
+                }
+            }
+        }
+
     }
 }
+

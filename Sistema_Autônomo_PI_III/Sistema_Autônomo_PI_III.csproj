@@ -73,11 +73,11 @@
     <Compile Include="Credito.Designer.cs">
       <DependentUpon>Credito.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="ExecutarPartida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ExecutarPartida.Designer.cs">
+      <DependentUpon>ExecutarPartida.cs</DependentUpon>
     </Compile>
     <Compile Include="GerenciarPartida.cs">
       <SubType>Form</SubType>
@@ -103,8 +103,8 @@
     <EmbeddedResource Include="Credito.resx">
       <DependentUpon>Credito.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ExecutarPartida.resx">
+      <DependentUpon>ExecutarPartida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GerenciarPartida.resx">
       <DependentUpon>GerenciarPartida.cs</DependentUpon>

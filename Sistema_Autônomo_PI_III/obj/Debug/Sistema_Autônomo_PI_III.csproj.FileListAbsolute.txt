@@ -79,7 +79,6 @@ C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_P
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\bin\Debug\KingMeServer.xml
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.csproj.AssemblyReference.cache
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.exe.config
-C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Form1.resources
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Menu.resources
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Personagens.resources
 C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.Properties.Resources.resources
@@ -109,3 +108,4 @@ C:\Users\Miguel\OneDrive\Documentos\Programas\Sistema_Aut-nomo_PI_III\Sistema_Au
 C:\Users\Miguel\OneDrive\Documentos\Programas\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_.44953B83.Up2Date
 C:\Users\Miguel\OneDrive\Documentos\Programas\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.exe
 C:\Users\Miguel\OneDrive\Documentos\Programas\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.pdb
+C:\Users\Isaias filho\OneDrive - SENAC - SP\Documentos\GitHub\Sistema_Aut-nomo_PI_III\Sistema_Autônomo_PI_III\obj\Debug\Sistema_Autônomo_PI_III.ExecutarPartida.resources

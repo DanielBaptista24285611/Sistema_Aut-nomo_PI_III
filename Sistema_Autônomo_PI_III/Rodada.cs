@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KingMeServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,6 +62,28 @@ public class Rodada
         return true;
     }
 
+    public bool PodeVotar()
+    {
+        string setoresTexto = Jogo.ListarSetores();
+
+        foreach (var linha in setoresTexto.Split('\n'))
+        {
+            if (linha.StartsWith("Setor 5:"))
+            {
+                // Pegamos o conteúdo depois dos ":"
+                string conteudo = linha.Substring("Setor 5:".Length).Trim();
+
+                // Verifica se há ao menos um personagem listado
+                return !string.IsNullOrWhiteSpace(conteudo);
+            }
+        }
+
+        // Se não achou o setor 5 ou ele está vazio, não pode votar
+        return false;
+    }
+
+
+
     public bool TodosVotaram(List<string> todosJogadores)
     {
         return todosJogadores.All(j => jogadoresQueVotaram.Contains(j.Trim().ToUpper()));
@@ -83,6 +106,12 @@ public class Rodada
 
         return votosSim > votosNao ? "Aprovado" : "Rejeitado";
     }
+    public bool VotacaoAprovada()
+    {
+        return votos.Values.All(v => v); // todos TRUE
+    }
+
+   
 
     public override string ToString()
     {

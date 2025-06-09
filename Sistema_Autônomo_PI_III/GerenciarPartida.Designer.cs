@@ -49,7 +49,6 @@
             this.txtNomeJogador = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.lblversao = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -113,6 +112,7 @@
             this.lstPartidas.Size = new System.Drawing.Size(311, 278);
             this.lstPartidas.TabIndex = 44;
             this.lstPartidas.Tag = "";
+            this.lstPartidas.SelectedIndexChanged += new System.EventHandler(this.lstPartidas_SelectedIndexChanged);
             // 
             // btnListarPartidas
             // 
@@ -230,7 +230,6 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.lblInforma2);
             this.tabPage2.Controls.Add(this.lstJogadores);
             this.tabPage2.Controls.Add(this.btnListarJogadores);
@@ -249,7 +248,7 @@
             this.lblInforma2.AutoSize = true;
             this.lblInforma2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInforma2.ForeColor = System.Drawing.Color.Goldenrod;
-            this.lblInforma2.Location = new System.Drawing.Point(323, 157);
+            this.lblInforma2.Location = new System.Drawing.Point(323, 156);
             this.lblInforma2.Name = "lblInforma2";
             this.lblInforma2.Size = new System.Drawing.Size(122, 23);
             this.lblInforma2.TabIndex = 47;
@@ -324,24 +323,12 @@
             this.lblversao.BackColor = System.Drawing.Color.AntiqueWhite;
             this.lblversao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblversao.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lblversao.Location = new System.Drawing.Point(560, 494);
+            this.lblversao.Location = new System.Drawing.Point(571, 496);
             this.lblversao.Name = "lblversao";
             this.lblversao.Size = new System.Drawing.Size(62, 23);
             this.lblversao.TabIndex = 31;
             this.lblversao.Text = "Versão";
             this.lblversao.Click += new System.EventHandler(this.lblversao_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(565, 498);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 23);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "Versão";
             // 
             // GerenciarPartida
             // 
@@ -385,6 +372,5 @@
         private System.Windows.Forms.Label lblInforma;
         private System.Windows.Forms.Label lblInforma2;
         private System.Windows.Forms.Label lblversao;
-        private System.Windows.Forms.Label label1;
     }
 }
