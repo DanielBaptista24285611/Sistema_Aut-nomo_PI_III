@@ -51,7 +51,6 @@ namespace Sistema_Autônomo_PI_III
             this.label1 = new System.Windows.Forms.Label();
             this.txtVoto = new System.Windows.Forms.TextBox();
             this.btnHistorico = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lstSetores = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@ namespace Sistema_Autônomo_PI_III
             this.btnIniciarJogo = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -83,9 +83,11 @@ namespace Sistema_Autônomo_PI_III
             // lblversao
             // 
             this.lblversao.AutoSize = true;
-            this.lblversao.Location = new System.Drawing.Point(1127, 665);
+            this.lblversao.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.lblversao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblversao.Location = new System.Drawing.Point(982, 521);
             this.lblversao.Name = "lblversao";
-            this.lblversao.Size = new System.Drawing.Size(51, 16);
+            this.lblversao.Size = new System.Drawing.Size(62, 23);
             this.lblversao.TabIndex = 30;
             this.lblversao.Text = "Versão";
             // 
@@ -201,18 +203,21 @@ namespace Sistema_Autônomo_PI_III
             // 
             // btnColocarPersonagem
             // 
-            this.btnColocarPersonagem.Location = new System.Drawing.Point(896, 53);
+            this.btnColocarPersonagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnColocarPersonagem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColocarPersonagem.Location = new System.Drawing.Point(672, 42);
             this.btnColocarPersonagem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnColocarPersonagem.Name = "btnColocarPersonagem";
-            this.btnColocarPersonagem.Size = new System.Drawing.Size(109, 86);
+            this.btnColocarPersonagem.Size = new System.Drawing.Size(126, 86);
             this.btnColocarPersonagem.TabIndex = 50;
             this.btnColocarPersonagem.Text = "Colocar Personagem";
-            this.btnColocarPersonagem.UseVisualStyleBackColor = true;
+            this.btnColocarPersonagem.UseVisualStyleBackColor = false;
             this.btnColocarPersonagem.Click += new System.EventHandler(this.btnColocarPersonagem_Click);
             // 
             // txtSetor
             // 
-            this.txtSetor.Location = new System.Drawing.Point(442, 65);
+            this.txtSetor.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.txtSetor.Location = new System.Drawing.Point(465, 67);
             this.txtSetor.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetor.Name = "txtSetor";
             this.txtSetor.Size = new System.Drawing.Size(125, 30);
@@ -221,26 +226,32 @@ namespace Sistema_Autônomo_PI_III
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(438, 25);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Goldenrod;
+            this.label2.Location = new System.Drawing.Point(461, 20);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 23);
+            this.label2.Size = new System.Drawing.Size(53, 23);
             this.label2.TabIndex = 52;
             this.label2.Text = "Setor";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(439, 129);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Goldenrod;
+            this.label3.Location = new System.Drawing.Point(461, 122);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 23);
+            this.label3.Size = new System.Drawing.Size(107, 23);
             this.label3.TabIndex = 53;
             this.label3.Text = "Personagem";
             // 
             // txtPersonagem
             // 
-            this.txtPersonagem.Location = new System.Drawing.Point(443, 167);
+            this.txtPersonagem.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.txtPersonagem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPersonagem.Location = new System.Drawing.Point(464, 165);
             this.txtPersonagem.Margin = new System.Windows.Forms.Padding(4);
             this.txtPersonagem.Name = "txtPersonagem";
             this.txtPersonagem.Size = new System.Drawing.Size(125, 30);
@@ -249,103 +260,108 @@ namespace Sistema_Autônomo_PI_III
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(474, 282);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Goldenrod;
+            this.label1.Location = new System.Drawing.Point(473, 282);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 23);
+            this.label1.Size = new System.Drawing.Size(95, 23);
             this.label1.TabIndex = 56;
             this.label1.Text = "Voto (S/N)";
             // 
             // txtVoto
             // 
-            this.txtVoto.Location = new System.Drawing.Point(478, 319);
+            this.txtVoto.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.txtVoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtVoto.Location = new System.Drawing.Point(474, 319);
             this.txtVoto.Margin = new System.Windows.Forms.Padding(4);
             this.txtVoto.Name = "txtVoto";
-            this.txtVoto.Size = new System.Drawing.Size(75, 30);
+            this.txtVoto.Size = new System.Drawing.Size(94, 30);
             this.txtVoto.TabIndex = 57;
             // 
             // btnHistorico
             // 
-            this.btnHistorico.Location = new System.Drawing.Point(788, 529);
+            this.btnHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnHistorico.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistorico.Location = new System.Drawing.Point(465, 380);
             this.btnHistorico.Margin = new System.Windows.Forms.Padding(4);
             this.btnHistorico.Name = "btnHistorico";
             this.btnHistorico.Size = new System.Drawing.Size(139, 46);
             this.btnHistorico.TabIndex = 61;
             this.btnHistorico.Text = "Histórico";
-            this.btnHistorico.UseVisualStyleBackColor = true;
+            this.btnHistorico.UseVisualStyleBackColor = false;
             this.btnHistorico.Click += new System.EventHandler(this.btnHistorico_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(807, 596);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 20);
-            this.checkBox1.TabIndex = 62;
-            this.checkBox1.Text = "Formatado";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1055, 37);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Goldenrod;
+            this.label4.Location = new System.Drawing.Point(858, 5);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 16);
+            this.label4.Size = new System.Drawing.Size(69, 23);
             this.label4.TabIndex = 63;
             this.label4.Text = "Setores";
             // 
             // lstSetores
             // 
+            this.lstSetores.BackColor = System.Drawing.Color.AntiqueWhite;
             this.lstSetores.FormattingEnabled = true;
-            this.lstSetores.ItemHeight = 16;
-            this.lstSetores.Location = new System.Drawing.Point(1043, 65);
+            this.lstSetores.ItemHeight = 23;
+            this.lstSetores.Location = new System.Drawing.Point(862, 32);
             this.lstSetores.Margin = new System.Windows.Forms.Padding(4);
             this.lstSetores.Name = "lstSetores";
-            this.lstSetores.Size = new System.Drawing.Size(169, 196);
+            this.lstSetores.Size = new System.Drawing.Size(169, 188);
             this.lstSetores.TabIndex = 64;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1055, 286);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Goldenrod;
+            this.label5.Location = new System.Drawing.Point(858, 234);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 16);
+            this.label5.Size = new System.Drawing.Size(108, 23);
             this.label5.TabIndex = 65;
             this.label5.Text = "Personagens";
             // 
             // lstPersonagens
             // 
+            this.lstPersonagens.BackColor = System.Drawing.Color.AntiqueWhite;
             this.lstPersonagens.FormattingEnabled = true;
-            this.lstPersonagens.ItemHeight = 16;
-            this.lstPersonagens.Location = new System.Drawing.Point(1043, 322);
+            this.lstPersonagens.ItemHeight = 23;
+            this.lstPersonagens.Location = new System.Drawing.Point(862, 261);
             this.lstPersonagens.Margin = new System.Windows.Forms.Padding(4);
             this.lstPersonagens.Name = "lstPersonagens";
-            this.lstPersonagens.Size = new System.Drawing.Size(169, 228);
+            this.lstPersonagens.Size = new System.Drawing.Size(169, 211);
             this.lstPersonagens.TabIndex = 66;
             // 
             // btnPersonagens
             // 
-            this.btnPersonagens.Location = new System.Drawing.Point(933, 638);
+            this.btnPersonagens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnPersonagens.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonagens.Location = new System.Drawing.Point(684, 510);
             this.btnPersonagens.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPersonagens.Name = "btnPersonagens";
-            this.btnPersonagens.Size = new System.Drawing.Size(139, 44);
+            this.btnPersonagens.Size = new System.Drawing.Size(165, 44);
             this.btnPersonagens.TabIndex = 67;
             this.btnPersonagens.Text = "Ver Personagens";
-            this.btnPersonagens.UseVisualStyleBackColor = true;
+            this.btnPersonagens.UseVisualStyleBackColor = false;
             this.btnPersonagens.Click += new System.EventHandler(this.btnPersonagens_Click);
             // 
             // btnVoltar
             // 
-            this.btnVoltar.Location = new System.Drawing.Point(837, 638);
+            this.btnVoltar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnVoltar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoltar.Location = new System.Drawing.Point(464, 510);
             this.btnVoltar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVoltar.Name = "btnVoltar";
-            this.btnVoltar.Size = new System.Drawing.Size(75, 46);
+            this.btnVoltar.Size = new System.Drawing.Size(126, 45);
             this.btnVoltar.TabIndex = 68;
             this.btnVoltar.Text = "Voltar";
-            this.btnVoltar.UseVisualStyleBackColor = true;
+            this.btnVoltar.UseVisualStyleBackColor = false;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // lblVotosRestantes
@@ -367,32 +383,39 @@ namespace Sistema_Autônomo_PI_III
             // 
             // btnIniciarAutomacao
             // 
-            this.btnIniciarAutomacao.Location = new System.Drawing.Point(921, 196);
+            this.btnIniciarAutomacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnIniciarAutomacao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarAutomacao.ForeColor = System.Drawing.Color.Black;
+            this.btnIniciarAutomacao.Location = new System.Drawing.Point(638, 165);
             this.btnIniciarAutomacao.Name = "btnIniciarAutomacao";
-            this.btnIniciarAutomacao.Size = new System.Drawing.Size(90, 45);
+            this.btnIniciarAutomacao.Size = new System.Drawing.Size(126, 45);
             this.btnIniciarAutomacao.TabIndex = 70;
             this.btnIniciarAutomacao.Text = "automaçao";
-            this.btnIniciarAutomacao.UseVisualStyleBackColor = true;
+            this.btnIniciarAutomacao.UseVisualStyleBackColor = false;
             this.btnIniciarAutomacao.Click += new System.EventHandler(this.btnIniciarAutomacao_Click);
             // 
             // btnPromover
             // 
-            this.btnPromover.Location = new System.Drawing.Point(468, 236);
+            this.btnPromover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnPromover.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPromover.Location = new System.Drawing.Point(474, 218);
             this.btnPromover.Name = "btnPromover";
-            this.btnPromover.Size = new System.Drawing.Size(99, 32);
+            this.btnPromover.Size = new System.Drawing.Size(99, 39);
             this.btnPromover.TabIndex = 71;
-            this.btnPromover.Text = "promover";
-            this.btnPromover.UseVisualStyleBackColor = true;
+            this.btnPromover.Text = "Promover";
+            this.btnPromover.UseVisualStyleBackColor = false;
             this.btnPromover.Click += new System.EventHandler(this.btnPromover_Click);
             // 
             // btnConfirmarVoto
             // 
-            this.btnConfirmarVoto.Location = new System.Drawing.Point(917, 269);
+            this.btnConfirmarVoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnConfirmarVoto.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmarVoto.Location = new System.Drawing.Point(625, 282);
             this.btnConfirmarVoto.Name = "btnConfirmarVoto";
-            this.btnConfirmarVoto.Size = new System.Drawing.Size(75, 39);
+            this.btnConfirmarVoto.Size = new System.Drawing.Size(102, 39);
             this.btnConfirmarVoto.TabIndex = 72;
             this.btnConfirmarVoto.Text = "Confirmar";
-            this.btnConfirmarVoto.UseVisualStyleBackColor = true;
+            this.btnConfirmarVoto.UseVisualStyleBackColor = false;
             this.btnConfirmarVoto.Click += new System.EventHandler(this.btnConfirmarVoto_Click);
             // 
             // tmrAutomatizador
@@ -416,26 +439,38 @@ namespace Sistema_Autônomo_PI_III
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(32, 15);
+            this.tabControl1.Location = new System.Drawing.Point(83, 44);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(707, 628);
+            this.tabControl1.Size = new System.Drawing.Size(1060, 606);
             this.tabControl1.TabIndex = 74;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.btnIniciarJogo);
+            this.tabPage1.Controls.Add(this.btnConfirmarVoto);
+            this.tabPage1.Controls.Add(this.btnVoltar);
             this.tabPage1.Controls.Add(this.lblNomeJogador);
+            this.tabPage1.Controls.Add(this.btnPersonagens);
+            this.tabPage1.Controls.Add(this.btnIniciarAutomacao);
+            this.tabPage1.Controls.Add(this.lstPersonagens);
+            this.tabPage1.Controls.Add(this.lblversao);
             this.tabPage1.Controls.Add(this.btnPromover);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.txtIDjogador);
+            this.tabPage1.Controls.Add(this.lstSetores);
             this.tabPage1.Controls.Add(this.lblSenhaJogador);
+            this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtSenhaJogador);
             this.tabPage1.Controls.Add(this.lstVerificarVez);
             this.tabPage1.Controls.Add(this.btnExibirCartas);
             this.tabPage1.Controls.Add(this.lblCartas);
             this.tabPage1.Controls.Add(this.lblNomeJogadorVez);
             this.tabPage1.Controls.Add(this.lblIDjogadorVez);
+            this.tabPage1.Controls.Add(this.btnHistorico);
             this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.btnColocarPersonagem);
             this.tabPage1.Controls.Add(this.txtVoto);
             this.tabPage1.Controls.Add(this.txtSetor);
             this.tabPage1.Controls.Add(this.label1);
@@ -445,30 +480,31 @@ namespace Sistema_Autônomo_PI_III
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(699, 599);
+            this.tabPage1.Size = new System.Drawing.Size(1052, 577);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "🎮Iniciar Jogo";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.ForeColor = System.Drawing.Color.Goldenrod;
+            this.checkBox1.Location = new System.Drawing.Point(611, 399);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(120, 27);
+            this.checkBox1.TabIndex = 74;
+            this.checkBox1.Text = "Formatado";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // ExecutarPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AntiqueWhite;
             this.ClientSize = new System.Drawing.Size(1224, 700);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btnConfirmarVoto);
-            this.Controls.Add(this.btnIniciarAutomacao);
             this.Controls.Add(this.lblVotosRestantes);
-            this.Controls.Add(this.btnVoltar);
-            this.Controls.Add(this.btnPersonagens);
-            this.Controls.Add(this.lstPersonagens);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.lstSetores);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.btnHistorico);
-            this.Controls.Add(this.btnColocarPersonagem);
-            this.Controls.Add(this.lblversao);
             this.Controls.Add(this.label6);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -509,7 +545,6 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtVoto;
         private System.Windows.Forms.Button btnHistorico;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox lstSetores;
         private System.Windows.Forms.Label label5;
@@ -526,6 +561,7 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.Button btnIniciarJogo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
