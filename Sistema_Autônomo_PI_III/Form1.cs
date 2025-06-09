@@ -17,7 +17,7 @@ namespace Sistema_Autônomo_PI_III
         private List<string> jogadores = new List<string>();
         private List<string> personagens = new List<string>()
 {
-    "A", "B", "D", "E", "G", "I", "K", "M", "Q","R", "T", "V", "Z"
+    "A", "B", "C",  "D", "E", "G", "H", "K", "L",  "M", "Q","R", "T"
 };
         private int idPartidaAtual;
         public string NomeJogador { get; set; }
@@ -278,7 +278,8 @@ namespace Sistema_Autônomo_PI_III
             lstVerificarVez.Items.Clear();
             lstVerificarVez.Items.Add("Histórico da partida:");
 
-            string historico = Jogo.ConsultarHistorico(idPartidaAtual, checkBox1.Checked);
+            /*string historico = Jogo.ConsultarHistorico(idPartidaAtual, checkBox1.Checked);
+           
 
             if (string.IsNullOrWhiteSpace(historico) || historico.Contains("ERRO"))
             {
@@ -290,7 +291,7 @@ namespace Sistema_Autônomo_PI_III
                 {
                     lstVerificarVez.Items.Add(linha);
                 }
-            }
+            }*/
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)

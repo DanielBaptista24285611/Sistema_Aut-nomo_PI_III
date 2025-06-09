@@ -26,6 +26,7 @@ namespace Sistema_Autônomo_PI_III
         {
             InitializeComponent();
             txtNomeGrupo.Text = "CavaleirosCanterbury";
+            lblversao.Text = Jogo.versao;
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -168,5 +169,9 @@ namespace Sistema_Autônomo_PI_III
             return 0;
         }
 
+        private void lblversao_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
