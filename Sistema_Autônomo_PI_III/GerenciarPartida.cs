@@ -27,6 +27,13 @@ namespace Sistema_Autônomo_PI_III
             InitializeComponent();
             txtNomeGrupo.Text = "CavaleirosCanterbury";
             lblversao.Text = Jogo.versao;
+
+            //Opções de filtro lista de partidas
+            cboFiltroLista.Items.Add("Todas");
+            cboFiltroLista.Items.Add("Aberta");
+            cboFiltroLista.Items.Add("Jogando");
+            cboFiltroLista.Items.Add("Encerradas");
+            cboFiltroLista.SelectedIndex = 0;
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -84,7 +91,7 @@ namespace Sistema_Autônomo_PI_III
         {
             lstPartidas.Items.Clear();
 
-            string retorno = Jogo.ListarPartidas("T").Replace("\r", "").Trim();
+            string retorno = Jogo.ListarPartidas(cboFiltroLista.Text.Substring(0, 1)).Replace("\r", "").Trim();
             foreach (var partida in retorno.Split('\n'))
             {
                 if (!string.IsNullOrWhiteSpace(partida))

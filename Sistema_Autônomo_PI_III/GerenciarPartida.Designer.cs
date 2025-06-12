@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblversao = new System.Windows.Forms.Label();
             this.lblInforma = new System.Windows.Forms.Label();
             this.lstPartidas = new System.Windows.Forms.ListBox();
             this.btnListarPartidas = new System.Windows.Forms.Button();
@@ -48,7 +49,8 @@
             this.btnEntrar = new System.Windows.Forms.Button();
             this.txtNomeJogador = new System.Windows.Forms.TextBox();
             this.lblNome = new System.Windows.Forms.Label();
-            this.lblversao = new System.Windows.Forms.Label();
+            this.cboFiltroLista = new System.Windows.Forms.ComboBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -68,6 +70,7 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage1.Controls.Add(this.cboFiltroLista);
             this.tabPage1.Controls.Add(this.lblversao);
             this.tabPage1.Controls.Add(this.lblInforma);
             this.tabPage1.Controls.Add(this.lstPartidas);
@@ -87,6 +90,19 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = " 🏰Criar Partida";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // lblversao
+            // 
+            this.lblversao.AutoSize = true;
+            this.lblversao.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.lblversao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblversao.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lblversao.Location = new System.Drawing.Point(571, 496);
+            this.lblversao.Name = "lblversao";
+            this.lblversao.Size = new System.Drawing.Size(62, 23);
+            this.lblversao.TabIndex = 31;
+            this.lblversao.Text = "Versão";
+            this.lblversao.Click += new System.EventHandler(this.lblversao_Click);
             // 
             // lblInforma
             // 
@@ -317,18 +333,14 @@
             this.lblNome.TabIndex = 21;
             this.lblNome.Text = "Nome do Jogador";
             // 
-            // lblversao
+            // cboFiltroLista
             // 
-            this.lblversao.AutoSize = true;
-            this.lblversao.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.lblversao.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblversao.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lblversao.Location = new System.Drawing.Point(571, 496);
-            this.lblversao.Name = "lblversao";
-            this.lblversao.Size = new System.Drawing.Size(62, 23);
-            this.lblversao.TabIndex = 31;
-            this.lblversao.Text = "Versão";
-            this.lblversao.Click += new System.EventHandler(this.lblversao_Click);
+            this.cboFiltroLista.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.cboFiltroLista.FormattingEnabled = true;
+            this.cboFiltroLista.Location = new System.Drawing.Point(463, 87);
+            this.cboFiltroLista.Name = "cboFiltroLista";
+            this.cboFiltroLista.Size = new System.Drawing.Size(121, 31);
+            this.cboFiltroLista.TabIndex = 46;
             // 
             // GerenciarPartida
             // 
@@ -372,5 +384,7 @@
         private System.Windows.Forms.Label lblInforma;
         private System.Windows.Forms.Label lblInforma2;
         private System.Windows.Forms.Label lblversao;
+        private System.Windows.Forms.ComboBox cboFiltroLista;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

@@ -22,6 +22,26 @@ namespace Sistema_Autônomo_PI_III
     "A", "B", "C",  "D", "E", "G", "H", "K", "L",  "M", "Q", "R", "T"
   
 };
+
+        private Dictionary<string, Image> imagemCarta = new Dictionary<string, Image>();
+
+        private void CarregarCarta()
+        {
+            imagemCarta["A"]= Properties.Resources.Carta_A;
+            imagemCarta["B"] = Properties.Resources.Carta_B;
+           // imagemCarta["C"] = Properties.Resources.Carta_C;
+            imagemCarta["D"] = Properties.Resources.Carta_D;
+            imagemCarta["E"] = Properties.Resources.Carta_E;
+            imagemCarta["G"] = Properties.Resources.Carta_G;
+            //imagemCarta["H"] = Properties.Resources.Carta_H;
+            imagemCarta["K"] = Properties.Resources.Carta_K;
+            //imagemCarta["L"] = Properties.Resources.Carta_L;
+            imagemCarta["M"] = Properties.Resources.Carta_M;
+            imagemCarta["Q"] = Properties.Resources.Carta_Q;
+            imagemCarta["R"] = Properties.Resources.Carta_R;
+            imagemCarta["T"] = Properties.Resources.Carta_T;
+        }
+
         private int idPartidaAtual;
         public string NomeJogador { get; set; }
 
@@ -39,6 +59,8 @@ namespace Sistema_Autônomo_PI_III
             NomeJogador = nomeJogador.Trim().ToUpper();
 
             AtualizarListasIniciais();
+
+            CarregarCarta();
             InicializarTimer();
         }
 
@@ -141,114 +163,183 @@ namespace Sistema_Autônomo_PI_III
         }
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-            try
+            if (!int.TryParse(txtIDjogador.Text, out int idJogador))
             {
-                // Validate input
-                if (!int.TryParse(txtIDjogador.Text, out int idJogador))
-                {
-                    MessageBox.Show("ID do jogador inválido!", "Erro");
-                    return;
-                }
-
-                // 1. Start the match
-                string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
-                lblIDjogadorVez.Text = retornoInicio;
-                lblNomeJogadorVez.Text = NomeJogador; // Ensure this is properly initialized
-
-                // 2. Check and display player's turn
-                lstVerificarVez.Items.Clear();
-                string retornoVez = Jogo.VerificarVez(idPartidaAtual);
-
-                foreach (var vez in retornoVez.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    lstVerificarVez.Items.Add(vez);
-                }
-                NomeJogador = Text.Trim().ToUpper();
-                if (!jogadores.Contains(NomeJogador))
-                    jogadores.Add(NomeJogador);
-
-                MessageBox.Show("Partida Iniciada com sucesso!", "Info");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao iniciar jogo: {ex.Message}", "Erro");
-                // Consider logging the error
-            }
-            foreach (var jogador in jogadores)
-            {
-                if (!pontosJogador.ContainsKey(jogador))
-                    pontosJogador[jogador] = 0;
+                MessageBox.Show("ID do jogador inválido!", "Erro");
+                return;
             }
 
+            string retornoInicio = Jogo.Iniciar(idJogador, txtSenhaJogador.Text);
+            lblIDjogadorVez.Text = retornoInicio;
+            lblNomeJogadorVez.Text = NomeJogador;
+
+            if (retornoInicio.StartsWith("ERRO:"))
+            {
+                lblErro.Text = retornoInicio;
+            }
+            else
+            {
+                lblErro.Text = "";
+            }
+            
         }
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
             int idJogador = int.Parse(txtIDjogador.Text);
-            lblCartas.Text = Jogo.ListarCartas(idJogador, txtSenhaJogador.Text);
+            string  retorno= Jogo.ListarCartas(idJogador, txtSenhaJogador.Text);
+
+            if(retorno.StartsWith("ERRO:"))
+            {
+                lblCartas.Text = retorno;
+                return;
+            }
+            else
+            {
+                Dictionary<char, string> personagens = new Dictionary<char, string>()
+            {
+                {'A', "Adilson"},
+                {'B', "Beatriz"},
+                {'C', "Claro"},
+                {'D', "Douglas"},
+                {'E', "Eduardo"},
+                {'G', "Guilherme"},
+                {'H', "Heredia"},
+                {'K', "Kelly"},
+                {'L', "Leonardo"},
+                {'M', "Mario"},
+                {'Q', "Quintas"},
+                {'R', "Ranulfo"},
+                {'T', "Toshio"}
+            };
+
+                List<string> nomesConvertidos = new List<string>();
+
+                foreach (char inicial in retorno)
+                {
+                    if (personagens.ContainsKey(inicial))
+                    {
+                        nomesConvertidos.Add(personagens[inicial]);
+                    }
+                }
+
+                lblCartas.Text = "Minhas cartas:\n" + string.Join("\n", nomesConvertidos);
+
+            }
+
         }
 
         private void btnVerificarVez_Click(object sender, EventArgs e)
         {
             if (idPartidaAtual == 0) return;
             lstVerificarVez.Items.Clear();
-            string retorno = Jogo.VerificarVez(idPartidaAtual).Replace("\r", "");
-            foreach (var vez in retorno.Split('\n'))
+            string retorno = Jogo.VerificarVez(idPartidaAtual).Trim();
+            string[] vezJogador = retorno.Split(',');
+            string[] linhas = retorno.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+
+            lblIDjogadorVez.Text = vezJogador[0].Trim();
+            lblNomeJogadorVez.Text = vezJogador[1].Trim();
+
+            string estadoTabuleiro = string.Join("\n", linhas.Skip(1));
+
+            // Obtém a lista de jogadores
+            string retorno2 = Jogo.ListarJogadores(idPartidaAtual).Trim();
+            string[] jogadores = retorno2.Split('\n'); // Divide os jogadores por linha
+
+            // Percorre os jogadores para encontrar o nome do jogador que tem a vez
+            string nomeJogadorVez = "";
+            int pontuacaoJogadorVez = 0;
+
+            foreach (string jogador in jogadores)
             {
-                if (!string.IsNullOrWhiteSpace(vez))
-                    lstVerificarVez.Items.Add(vez);
+                string[] dadosJogador = jogador.Split(',');
+
+                if (dadosJogador.Length >= 3 && dadosJogador[0].Trim() == vezJogador[0].Trim())
+                {
+                    nomeJogadorVez = dadosJogador[1].Trim();
+                    pontuacaoJogadorVez = int.Parse(dadosJogador[2].Trim());
+
+                    break;
+                }
             }
+            //AtualizarTabuleiro(estadoTabuleiro);
+
         }
 
         private void btnColocarPersonagem_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtSetor.Text, out int setorSelecionado))
+            if (string.IsNullOrEmpty(txtSetor.Text) || string.IsNullOrEmpty(txtPersonagem.Text))
             {
-                MessageBox.Show("Setor inválido.");
+                MessageBox.Show("Informe o Setor e o Personagem.");
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtPersonagem.Text))
+            // Converte o ID do jogador para inteiro
+            int jogador1;
+            if (!int.TryParse(txtIDjogador.Text, out jogador1))
             {
-                MessageBox.Show("Informe o personagem.");
+                MessageBox.Show("O ID do jogador deve ser um número válido.");
                 return;
             }
 
-            string personagem = txtPersonagem.Text.Substring(0, 1).ToUpper();
-            int idJogador = int.Parse(txtIDjogador.Text);
-            string senha = txtSenhaJogador.Text;
+            string senha = txtSenhaJogador.Text; // Obtém a senha do jogador
 
-            string resultado = Jogo.ColocarPersonagem(idJogador, senha, setorSelecionado, personagem);
+            // Obtém os setores disponíveis
+            string setoresStr = Jogo.ListarSetores().Replace("\r", "");
+            string[] setores = setoresStr.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
+            // Obtém os personagens disponíveis
+            string personagensStr = Jogo.ListarPersonagens().Replace("\r", "");
+            string[] personagens = personagensStr.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Criar uma lista apenas com os IDs dos setores
+            List<int> idsSetores = new List<int>();
+            foreach (string setor in setores)
+            {
+                string[] partes = setor.Split(',');
+                if (partes.Length > 1 && int.TryParse(partes[0], out int idSetor))
+                {
+                    idsSetores.Add(idSetor);
+                }
+            }
+
+            // Converter txtSetor.Text para número
+            int setorSelecionado;
+            if (!int.TryParse(txtSetor.Text, out setorSelecionado) || !idsSetores.Contains(setorSelecionado))
+            {
+                MessageBox.Show("O setor digitado não é válido.");
+                return;
+            }
+
+            // Pegar apenas a primeira letra do personagem digitado
+            string personagemSelecionado = txtPersonagem.Text.Trim();
+            if (string.IsNullOrEmpty(personagemSelecionado))
+            {
+                MessageBox.Show("O personagem digitado não pode estar vazio.");
+                return;
+            }
+
+            personagemSelecionado = personagemSelecionado.Substring(0, 1).ToUpper(); // Apenas a primeira letra
+
+            // Verificar se essa letra está na lista de personagens
+            bool personagemValido = personagens.Any(p => p.StartsWith(personagemSelecionado, StringComparison.OrdinalIgnoreCase));
+
+            if (!personagemValido)
+            {
+                MessageBox.Show("O personagem digitado não é válido.");
+                return;
+            }
+
+            // Chama o método para posicionar o personagem
+            string resultado = Jogo.ColocarPersonagem(jogador1, senha, setorSelecionado, personagemSelecionado);
+
+            lstVerificarVez.Items.Add(resultado);
+
+            // Atualiza a ListBox lstVerificarVez com o personagem e setor escolhidos
             lstVerificarVez.Items.Clear();
-
-            var linhas = resultado.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (!personagens.Contains(personagem))
-            {
-                MessageBox.Show("Esse personagem não é válido.");
-                return;
-            }
-
-            if (personagensTabuleiro.Contains(personagem))
-            {
-                MessageBox.Show("Esse personagem já foi colocado no tabuleiro.");
-                return;
-            }
-            if (!personagemParaJogador.ContainsKey(personagem))
-            {
-                personagemParaJogador[personagem] = idJogador.ToString();
-            }
-
-
-            // Adiciona cada linha separadamente
-            foreach (var linha in linhas)
-            {
-                lstVerificarVez.Items.Add(linha.Trim());
-            }
-
-            personagensTabuleiro.Add(personagem);
         }
+
+
 
         private void btnPromover_Click(object sender, EventArgs e)
         {

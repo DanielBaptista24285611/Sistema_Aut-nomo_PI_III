@@ -67,7 +67,9 @@ namespace Sistema_Autônomo_PI_III
             this.btnIniciarJogo = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblErro = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -183,7 +185,7 @@ namespace Sistema_Autônomo_PI_III
             this.lblIDjogadorVez.AutoSize = true;
             this.lblIDjogadorVez.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIDjogadorVez.ForeColor = System.Drawing.Color.Goldenrod;
-            this.lblIDjogadorVez.Location = new System.Drawing.Point(232, 77);
+            this.lblIDjogadorVez.Location = new System.Drawing.Point(232, 89);
             this.lblIDjogadorVez.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIDjogadorVez.Name = "lblIDjogadorVez";
             this.lblIDjogadorVez.Size = new System.Drawing.Size(131, 23);
@@ -195,7 +197,7 @@ namespace Sistema_Autônomo_PI_III
             this.lblNomeJogadorVez.AutoSize = true;
             this.lblNomeJogadorVez.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomeJogadorVez.ForeColor = System.Drawing.Color.Goldenrod;
-            this.lblNomeJogadorVez.Location = new System.Drawing.Point(225, 32);
+            this.lblNomeJogadorVez.Location = new System.Drawing.Point(225, 51);
             this.lblNomeJogadorVez.Name = "lblNomeJogadorVez";
             this.lblNomeJogadorVez.Size = new System.Drawing.Size(138, 23);
             this.lblNomeJogadorVez.TabIndex = 49;
@@ -283,7 +285,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.btnHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
             this.btnHistorico.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHistorico.Location = new System.Drawing.Point(465, 380);
+            this.btnHistorico.Location = new System.Drawing.Point(451, 399);
             this.btnHistorico.Margin = new System.Windows.Forms.Padding(4);
             this.btnHistorico.Name = "btnHistorico";
             this.btnHistorico.Size = new System.Drawing.Size(139, 46);
@@ -439,6 +441,7 @@ namespace Sistema_Autônomo_PI_III
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(83, 44);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -447,6 +450,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblErro);
             this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.btnIniciarJogo);
             this.tabPage1.Controls.Add(this.btnConfirmarVoto);
@@ -477,32 +481,50 @@ namespace Sistema_Autônomo_PI_III
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtPersonagem);
             this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.ForeColor = System.Drawing.Color.Goldenrod;
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1052, 577);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "🎮Iniciar Jogo";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblErro
+            // 
+            this.lblErro.AutoSize = true;
+            this.lblErro.BackColor = System.Drawing.Color.Transparent;
+            this.lblErro.Location = new System.Drawing.Point(258, 20);
+            this.lblErro.Name = "lblErro";
+            this.lblErro.Size = new System.Drawing.Size(0, 23);
+            this.lblErro.TabIndex = 75;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.ForeColor = System.Drawing.Color.Goldenrod;
-            this.checkBox1.Location = new System.Drawing.Point(611, 399);
+            this.checkBox1.Location = new System.Drawing.Point(607, 427);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(120, 27);
             this.checkBox1.TabIndex = 74;
             this.checkBox1.Text = "Formatado";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1052, 577);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // ExecutarPartida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.ClientSize = new System.Drawing.Size(1224, 700);
+            this.ClientSize = new System.Drawing.Size(1211, 700);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblVotosRestantes);
             this.Controls.Add(this.label6);
@@ -562,6 +584,8 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label lblErro;
     }
 }
 
