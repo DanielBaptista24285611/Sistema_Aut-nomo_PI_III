@@ -147,7 +147,7 @@ namespace Sistema_Autônomo_PI_III
             // Abre diretamente a tela de Personagens e depois Form1
             Personagens personagensForm = new Personagens();
             string nomeJogador = txtNomeJogador.Text;
-            var form1 = new ExecutarPartida(personagensForm, idJogador, senhaJogador, nomeJogador,idPartidaAtual);
+            var form1 = new ExecutarPartida(personagensForm, idJogador, senhaJogador, nomeJogador);
             form1.NomeJogador = txtNomeJogador.Text;
             form1.Show();
                 
