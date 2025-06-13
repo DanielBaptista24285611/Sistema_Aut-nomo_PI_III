@@ -1,4 +1,4 @@
-// Form1.cs
+// ExecutarPartida.cs
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,16 +19,16 @@ namespace Sistema_Autônomo_PI_III
         private List<string> personagens = new List<string>()
 {
     "A", "B", "C",  "D", "E", "G", "H", "K", "L",  "M", "Q", "R", "T"
-  
+
 };
 
         private Dictionary<string, Image> imagemCarta = new Dictionary<string, Image>();
 
         private void CarregarCarta()
         {
-            imagemCarta["A"]= Properties.Resources.Carta_A;
+            imagemCarta["A"] = Properties.Resources.Carta_A;
             imagemCarta["B"] = Properties.Resources.Carta_B;
-           // imagemCarta["C"] = Properties.Resources.Carta_C;
+            // imagemCarta["C"] = Properties.Resources.Carta_C;
             imagemCarta["D"] = Properties.Resources.Carta_D;
             imagemCarta["E"] = Properties.Resources.Carta_E;
             imagemCarta["G"] = Properties.Resources.Carta_G;
@@ -62,14 +62,31 @@ namespace Sistema_Autônomo_PI_III
             txtSenhaJogador.Text = senhaJogador;
 
             CarregarCarta();
+            AtualizarListasIniciais();
             tmrVerificarVez.Interval = 3000;
             tmrVerificarVez.Enabled = true;
         }
 
+        private void AtualizarListasIniciais()
+        {
+            lstSetores.Items.Clear();
+            foreach (var setor in Jogo.ListarSetores().Split('\n'))
+            {
+                if (!string.IsNullOrWhiteSpace(setor))
+                    lstSetores.Items.Add(setor);
+            }
+
+            lstPersonagens.Items.Clear();
+            foreach (var personagem in Jogo.ListarPersonagens().Split('\n'))
+            {
+                if (!string.IsNullOrWhiteSpace(personagem))
+                    lstPersonagens.Items.Add(personagem);
+            }
+        }
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-            
+
             string retornoInicio = Jogo.Iniciar(idJogadorAtual, senhaJogador);
             tmrVerificarVez.Enabled = true;
 
@@ -90,10 +107,10 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnExibirCartas_Click(object sender, EventArgs e)
         {
-           
-            string  retorno= Jogo.ListarCartas(idJogadorAtual, senhaJogador);
 
-            if(retorno.StartsWith("ERRO:"))
+            string retorno = Jogo.ListarCartas(idJogadorAtual, senhaJogador);
+
+            if (retorno.StartsWith("ERRO:"))
             {
                 lblCartas.Text = retorno;
                 return;
@@ -104,13 +121,13 @@ namespace Sistema_Autônomo_PI_III
             {
                 {'A', "Adilson"},
                 {'B', "Beatriz"},
-                {'C', "Claro"},
+               // {'C', "Claro"},
                 {'D', "Douglas"},
                 {'E', "Eduardo"},
                 {'G', "Guilherme"},
-                {'H', "Heredia"},
+                //{'H', "Heredia"},
                 {'K', "Kelly"},
-                {'L', "Leonardo"},
+               // {'L', "Leonardo"},
                 {'M', "Mario"},
                 {'Q', "Quintas"},
                 {'R', "Ranulfo"},
@@ -141,7 +158,7 @@ namespace Sistema_Autônomo_PI_III
             string[] linhas = retorno.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
             lblIDjogadorVez.Text = vezJogador[0].Trim();
-           
+
             string estadoTabuleiro = string.Join("\n", linhas.Skip(1));
 
             // Obtém a lista de jogadores
@@ -163,7 +180,7 @@ namespace Sistema_Autônomo_PI_III
 
         private void btnColocarPersonagem_Click(object sender, EventArgs e)
         {
-            string estadoAtual = Jogo.ColocarPersonagem(idJogadorAtual,senhaJogador,
+            string estadoAtual = Jogo.ColocarPersonagem(idJogadorAtual, senhaJogador,
                Convert.ToInt32(txtSetor.Text), txtPersonagem.Text);
 
             AtualizarRodada(estadoAtual);
@@ -191,13 +208,13 @@ namespace Sistema_Autônomo_PI_III
         {
             Dictionary<int, Point> posicoesSetores = new Dictionary<int, Point>
     {
-        { 0, new Point(555, 520) },
-        { 1, new Point(555, 440) },
-        { 2, new Point(555, 360) },
-        { 3, new Point(555, 280) },
-        { 4, new Point(555, 200) },
-        { 5, new Point(555, 120) },
-        { 10, new Point(634, 51) }
+        { 0, new Point(410, 520) },
+        { 1, new Point(410, 440) },
+        { 2, new Point(410, 360) },
+        { 3, new Point(410, 280) },
+        { 4, new Point(410, 200) },
+        { 5, new Point(410, 120) },
+        { 10, new Point(500, 51) }
     };
 
             // Verifica se o setor existe
@@ -252,7 +269,7 @@ namespace Sistema_Autônomo_PI_III
         private void btnPromover_Click(object sender, EventArgs e)
         {
             string personagem = txtPersonagem.Text;
-            Jogo.Promover(idJogadorAtual,senhaJogador, personagem);
+            Jogo.Promover(idJogadorAtual, senhaJogador, personagem);
 
             // Obtém o ID do jogador que tem a vez
             string retorno = Jogo.VerificarVez(idPartidaAtual).Trim();
@@ -284,7 +301,7 @@ namespace Sistema_Autônomo_PI_III
                 // Atualiza minhas cartas sempre que verifica a vez
                 if (JogadorDaVez())
                 {
-                   AtualizarMinhasCartas();
+                    AtualizarMinhasCartas();
                 }
 
                 bool iniciada = vez.Length > 1 && vez[1].Trim().Equals("J");
@@ -355,7 +372,7 @@ namespace Sistema_Autônomo_PI_III
                     if (partes.Length == 2 && int.TryParse(partes[0].Trim(), out int setor) && setor == 10)
                     {
                         string carta = partes[1].Trim();
-                        lblExibir.Text += $"REI: {carta} no setor 10\n";
+                        lstLog.Items.Add($"REI: {carta} no setor 10"); // Changed to lstLog
                         Console.WriteLine($"Carta {carta} chegou ao KingsMe");
                         return true;
                     }
@@ -389,7 +406,7 @@ namespace Sistema_Autônomo_PI_III
         {
             try
             {
-                string retorno = Jogo.ListarCartas(idJogadorAtual,senhaJogador);
+                string retorno = Jogo.ListarCartas(idJogadorAtual, senhaJogador);
 
                 if (retorno.StartsWith("ERRO:"))
                 {
@@ -633,11 +650,12 @@ namespace Sistema_Autônomo_PI_III
 
                     if (partes.Length > 4)
                     {
-                        lblExibir.Text += $"=== FIM DE JOGO ===\nVencedor: {partes[4]}\n";
+                        lstLog.Items.Add($"=== FIM DE JOGO ==="); // Changed to lstLog
+                        lstLog.Items.Add($"Vencedor: {partes[4]}"); // Changed to lstLog
                     }
                     else
                     {
-                        lblExibir.Text += "=== FIM DE JOGO ===\n";
+                        lstLog.Items.Add("=== FIM DE JOGO ==="); // Changed to lstLog
                     }
                 }
             }
@@ -677,8 +695,8 @@ namespace Sistema_Autônomo_PI_III
 
                 // Atualiza a interface
                 rodadaAtual++;
-                lblExibir.Text = $"Rodada: {rodadaAtual}\n";
-                lblExibir.Text += "=== NOVA RODADA INICIADA ===\n";
+                lstLog.Items.Add($"Rodada: {rodadaAtual}"); // Changed to lstLog
+                lstLog.Items.Add("=== NOVA RODADA INICIADA ==="); // Changed to lstLog
             }
             catch (Exception ex)
             {
@@ -758,14 +776,14 @@ namespace Sistema_Autônomo_PI_III
                 // Verifica se todos os personagens já foram colocados
                 if (personagensColocados.Count >= 13) // Total de personagens no jogo
                 {
-                    lblExibir.Text += "Todos os personagens já foram posicionados.\n";
+                    lstLog.Items.Add("Todos os personagens já foram posicionados."); // Changed to lstLog
                     return;
                 }
 
                 string personagem = EscolherMelhorPersonagemDisponivel();
                 if (personagem == null)
                 {
-                    lblExibir.Text += "Todos os personagens já foram posicionados no tabuleiro.\n";
+                    lstLog.Items.Add("Todos os personagens já foram posicionados no tabuleiro."); // Changed to lstLog
                     return;
                 }
 
@@ -779,13 +797,13 @@ namespace Sistema_Autônomo_PI_III
 
                     if (setor == -1)
                     {
-                        lblExibir.Text += "ERRO: Todos os setores de setup estão cheios. Verifique o jogo.\n";
+                        lstLog.Items.Add("ERRO: Todos os setores de setup estão cheios. Verifique o jogo."); // Changed to lstLog
                         return;
                     }
                 }
 
-                PosicionarPersonagem(idJogadorAtual,senhaJogador, personagem, setor);
-                lblExibir.Text += $"Posicionado: {personagem} no setor {setor}\n";
+                PosicionarPersonagem(idJogadorAtual, senhaJogador, personagem, setor);
+                lstLog.Items.Add($"Posicionado: {personagem} no setor {setor}"); // Changed to lstLog
                 personagensColocados.Add(personagem);
             }
             catch (Exception ex)
@@ -866,7 +884,7 @@ namespace Sistema_Autônomo_PI_III
 
                         if (!resultado.StartsWith("ERRO:"))
                         {
-                            lblExibir.Text += $"Promovido estrategicamente para KingsMe: {melhorPersonagem}\n";
+                            lstLog.Items.Add($"Promovido estrategicamente para KingsMe: {melhorPersonagem}"); // Changed to lstLog
                             return;
                         }
                     }
@@ -894,7 +912,7 @@ namespace Sistema_Autônomo_PI_III
 
                                 if (!resultado.StartsWith("ERRO:"))
                                 {
-                                    lblExibir.Text += $"Promovido estrategicamente: {melhorPersonagem} (Setor {setorAtual}->{setorDestino})\n";
+                                    lstLog.Items.Add($"Promovido estrategicamente: {melhorPersonagem} (Setor {setorAtual}->{setorDestino})"); // Changed to lstLog
                                     return;
                                 }
                             }
@@ -902,7 +920,7 @@ namespace Sistema_Autônomo_PI_III
                     }
                 }
 
-                lblExibir.Text += "Nenhuma promoção estratégica possível no momento.\n";
+                lstLog.Items.Add("Nenhuma promoção estratégica possível no momento."); // Changed to lstLog
             }
             catch (Exception ex)
             {
@@ -930,19 +948,19 @@ namespace Sistema_Autônomo_PI_III
                     {
                         votacaoConcluida = false;
                         ultimaCartaRei = cartaReiAtual;
-                        lblExibir.Text += $"Nova votação iniciada para: {cartaReiAtual}\n";
+                        lstLog.Items.Add($"Nova votação iniciada para: {cartaReiAtual}"); // Changed to lstLog
                     }
 
                     if (!votacaoConcluida)
                     {
                         string voto = EscolherVotoEstrategico(cartaReiAtual);
 
-                        string resultado = Jogo.Votar( idJogadorAtual, senhaJogador, voto);
+                        string resultado = Jogo.Votar(idJogadorAtual, senhaJogador, voto);
 
                         if (!resultado.StartsWith("ERRO:"))
                         {
                             votacaoConcluida = true;
-                            lblExibir.Text += $"Voto registrado: {voto} para {cartaReiAtual}\n";
+                            lstLog.Items.Add($"Voto registrado: {voto} para {cartaReiAtual}"); // Changed to lstLog
 
                             if (voto == "S")
                             {
@@ -951,7 +969,7 @@ namespace Sistema_Autônomo_PI_III
                         }
                         else
                         {
-                            lblExibir.Text += $"Erro ao votar: {resultado}\n";
+                            lstLog.Items.Add($"Erro ao votar: {resultado}"); // Changed to lstLog
                         }
                     }
                 }
@@ -985,7 +1003,7 @@ namespace Sistema_Autônomo_PI_III
 
                     if (!resultado.StartsWith("ERRO:"))
                     {
-                        lblExibir.Text += $"Promovido para KingsMe: {personagem}\n";
+                        lstLog.Items.Add($"Promovido para KingsMe: {personagem}"); // Changed to lstLog
                         return;
                     }
                 }
@@ -1008,14 +1026,14 @@ namespace Sistema_Autônomo_PI_III
 
                             if (!resultado.StartsWith("ERRO:"))
                             {
-                                lblExibir.Text += $"Promovido: {personagem} (Setor {setorAtual} -> {setorDestino})\n";
+                                lstLog.Items.Add($"Promovido: {personagem} (Setor {setorAtual} -> {setorDestino})"); // Changed to lstLog
                                 return;
                             }
                         }
                     }
                 }
 
-                lblExibir.Text += "Nenhuma promoção possível no momento.\n";
+                lstLog.Items.Add("Nenhuma promoção possível no momento."); // Changed to lstLog
             }
             catch (Exception ex)
             {
@@ -1157,7 +1175,7 @@ namespace Sistema_Autônomo_PI_III
                 }
                 setores[setor].Add(personagem);
 
-                lblExibir.Text += $"Posicionado: {personagem} no setor {setor}\n";
+                lstLog.Items.Add($"Posicionado: {personagem} no setor {setor}"); // Changed to lstLog
                 AtualizarRodada(estadoAtual);
             }
             catch (Exception ex)
@@ -1207,7 +1225,7 @@ namespace Sistema_Autônomo_PI_III
                 var cartasDisponiveis = minhasCartas
                     .Except(personagensColocados)
                     .OrderByDescending(c => rankingPersonagens.ContainsKey(c) ? rankingPersonagens[c] : 0).ToList();
-                    
+
 
                 if (cartasDisponiveis.Count > 0)
                 {
@@ -1238,14 +1256,14 @@ namespace Sistema_Autônomo_PI_III
         {
 
         }
-    
+
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        
+
 
         private void lstJogadores_SelectedIndexChanged(object sender, EventArgs e) { }
         private void lstVerificarVez_SelectedIndexChanged(object sender, EventArgs e) { }

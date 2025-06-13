@@ -47,7 +47,6 @@ namespace Sistema_Autônomo_PI_III
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPersonagem = new System.Windows.Forms.TextBox();
-            this.btnHistorico = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lstSetores = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,11 +60,11 @@ namespace Sistema_Autônomo_PI_III
             this.btnIniciarJogo = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.lblExibir = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnVerificarVez = new System.Windows.Forms.Button();
             this.lblErro = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.lstLog = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -154,6 +153,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.btnExibirCartas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
             this.btnExibirCartas.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExibirCartas.ForeColor = System.Drawing.Color.Black;
             this.btnExibirCartas.Location = new System.Drawing.Point(854, 15);
             this.btnExibirCartas.Margin = new System.Windows.Forms.Padding(4);
             this.btnExibirCartas.Name = "btnExibirCartas";
@@ -190,6 +190,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.btnColocarPersonagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
             this.btnColocarPersonagem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColocarPersonagem.ForeColor = System.Drawing.Color.Black;
             this.btnColocarPersonagem.Location = new System.Drawing.Point(143, 496);
             this.btnColocarPersonagem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnColocarPersonagem.Name = "btnColocarPersonagem";
@@ -243,18 +244,6 @@ namespace Sistema_Autônomo_PI_III
             this.txtPersonagem.Size = new System.Drawing.Size(145, 30);
             this.txtPersonagem.TabIndex = 54;
             // 
-            // btnHistorico
-            // 
-            this.btnHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
-            this.btnHistorico.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHistorico.Location = new System.Drawing.Point(996, 595);
-            this.btnHistorico.Margin = new System.Windows.Forms.Padding(4);
-            this.btnHistorico.Name = "btnHistorico";
-            this.btnHistorico.Size = new System.Drawing.Size(139, 46);
-            this.btnHistorico.TabIndex = 61;
-            this.btnHistorico.Text = "Histórico";
-            this.btnHistorico.UseVisualStyleBackColor = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -305,7 +294,8 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.btnVoltar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
             this.btnVoltar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoltar.Location = new System.Drawing.Point(854, 601);
+            this.btnVoltar.ForeColor = System.Drawing.Color.Black;
+            this.btnVoltar.Location = new System.Drawing.Point(933, 596);
             this.btnVoltar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(126, 45);
@@ -337,6 +327,7 @@ namespace Sistema_Autônomo_PI_III
             // 
             this.btnPromover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
             this.btnPromover.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPromover.ForeColor = System.Drawing.Color.Black;
             this.btnPromover.Location = new System.Drawing.Point(143, 581);
             this.btnPromover.Name = "btnPromover";
             this.btnPromover.Size = new System.Drawing.Size(183, 74);
@@ -374,11 +365,11 @@ namespace Sistema_Autônomo_PI_III
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.lblExibir);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lstLog);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.btnVerificarVez);
             this.tabPage1.Controls.Add(this.lblErro);
-            this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.btnIniciarJogo);
             this.tabPage1.Controls.Add(this.btnVoltar);
             this.tabPage1.Controls.Add(this.lblNomeJogador);
@@ -395,7 +386,6 @@ namespace Sistema_Autônomo_PI_III
             this.tabPage1.Controls.Add(this.lblCartas);
             this.tabPage1.Controls.Add(this.lblNomeJogadorVez);
             this.tabPage1.Controls.Add(this.lblIDjogadorVez);
-            this.tabPage1.Controls.Add(this.btnHistorico);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.btnColocarPersonagem);
             this.tabPage1.Controls.Add(this.txtSetor);
@@ -410,19 +400,10 @@ namespace Sistema_Autônomo_PI_III
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // lblExibir
-            // 
-            this.lblExibir.AutoSize = true;
-            this.lblExibir.Location = new System.Drawing.Point(850, 192);
-            this.lblExibir.Name = "lblExibir";
-            this.lblExibir.Size = new System.Drawing.Size(55, 23);
-            this.lblExibir.TabIndex = 80;
-            this.lblExibir.Text = "label1";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Sistema_Autônomo_PI_III.Properties.Resources.Tabuleiro;
-            this.pictureBox1.Location = new System.Drawing.Point(392, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(400, 15);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(433, 685);
@@ -432,12 +413,15 @@ namespace Sistema_Autônomo_PI_III
             // 
             // btnVerificarVez
             // 
+            this.btnVerificarVez.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(207)))), ((int)(((byte)(128)))));
+            this.btnVerificarVez.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerificarVez.ForeColor = System.Drawing.Color.Black;
             this.btnVerificarVez.Location = new System.Drawing.Point(6, 239);
             this.btnVerificarVez.Name = "btnVerificarVez";
             this.btnVerificarVez.Size = new System.Drawing.Size(147, 48);
             this.btnVerificarVez.TabIndex = 76;
-            this.btnVerificarVez.Text = "Ver Vez";
-            this.btnVerificarVez.UseVisualStyleBackColor = true;
+            this.btnVerificarVez.Text = "Verificar Vez";
+            this.btnVerificarVez.UseVisualStyleBackColor = false;
             this.btnVerificarVez.Click += new System.EventHandler(this.btnVerificarVez_Click);
             // 
             // lblErro
@@ -449,17 +433,26 @@ namespace Sistema_Autônomo_PI_III
             this.lblErro.Size = new System.Drawing.Size(0, 23);
             this.lblErro.TabIndex = 75;
             // 
-            // checkBox1
+            // lstLog
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.ForeColor = System.Drawing.Color.Goldenrod;
-            this.checkBox1.Location = new System.Drawing.Point(1051, 663);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 27);
-            this.checkBox1.TabIndex = 74;
-            this.checkBox1.Text = "Formatado";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.lstLog.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.lstLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lstLog.FormattingEnabled = true;
+            this.lstLog.ItemHeight = 23;
+            this.lstLog.Location = new System.Drawing.Point(854, 155);
+            this.lstLog.Name = "lstLog";
+            this.lstLog.Size = new System.Drawing.Size(281, 393);
+            this.lstLog.TabIndex = 81;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(885, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(133, 23);
+            this.label1.TabIndex = 82;
+            this.label1.Text = "Movimentação:";
             // 
             // ExecutarPartida
             // 
@@ -506,7 +499,6 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPersonagem;
-        private System.Windows.Forms.Button btnHistorico;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox lstSetores;
         private System.Windows.Forms.Label label5;
@@ -520,11 +512,11 @@ namespace Sistema_Autônomo_PI_III
         private System.Windows.Forms.Button btnIniciarJogo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label lblErro;
         private System.Windows.Forms.Button btnVerificarVez;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblExibir;
+        private System.Windows.Forms.ListBox lstLog;
+        private System.Windows.Forms.Label label1;
     }
 }
 
